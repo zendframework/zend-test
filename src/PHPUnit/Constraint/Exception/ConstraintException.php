@@ -14,45 +14,29 @@
  *
  * @category   Zend
  * @package    Zend_Test
- * @subpackage UnitTests
+ * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\Test\PHPUnit\Db\DataSet;
+namespace Zend\Test\PHPUnit\Constraint\Exception;
 
 /**
+ * Zend_Test_PHPUnit_Constraint_Exception
+ *
+ * @uses       PHPUnit_Framework_ExpectationFailedException
  * @category   Zend
  * @package    Zend_Test
- * @subpackage UnitTests
+ * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Test
  */
-abstract class DataSetTestCase extends \PHPUnit_Framework_TestCase
+class ConstraintException 
+	extends \PHPUnit_Framework_ExpectationFailedException
+	implements \Zend\Test\PHPUnit\Constraint\Exception
 {
-    /**
-     * @var PHPUnit_Extensions_Database_DB_IDatabaseConnection
-     */
-    protected $connectionMock = null;
-
-    public function setUp()
-    {
-        $this->connectionMock = $this->getMock('Zend\Test\PHPUnit\Db\Connection', array(), array(), '', false);
-    }
-
-    public function decorateConnectionMockWithZendAdapter()
-    {
-        $this->decorateConnectionGetConnectionWith(new \Zend\Test\DbAdapter());
-    }
-
-    public function decorateConnectionGetConnectionWith($returnValue)
-    {
-        $this->connectionMock->expects($this->any())
-                             ->method('getConnection')
-                             ->will($this->returnValue($returnValue));
-    }
 }
