@@ -19,29 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test\PHPUnit;
 
 /**
  * Generic Testcase for Zend Framework related DbUnit Testing with PHPUnit
  *
- * @uses       PHPUnit_Extensions_Database_Operation_Composite
- * @uses       PHPUnit_Extensions_Database_TestCase
- * @uses       \Zend\Test\PHPUnit\Db\Connection
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbTable
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbTableDataSet
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbRowset
- * @uses       \Zend\Test\PHPUnit\Db\Operation\Insert
- * @uses       \Zend\Test\PHPUnit\Db\Operation\Truncate
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
+abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     /**
      * Creates a new Zend Database Connection using the given Adapter and database schema name.
