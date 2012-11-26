@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-test",
-    "description": " ",
+    "description": "Zend\\Test component",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -9,11 +9,11 @@
     "homepage": "https://github.com/zendframework/zend-test",
     "autoload": {
         "psr-4": {
-            "Zend\\Test": "src/"
+            "Zend\\Test\\": "src/"
         }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "phpunit/PHPUnit": "~4.0",
         "zendframework/zend-console": "self.version",
         "zendframework/zend-dom": "self.version",
