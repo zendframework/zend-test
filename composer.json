@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-test",
-    "description": "Zend\\Test component",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -13,8 +13,8 @@
         }
     },
     "require": {
-        "php": ">=5.3.23",
-        "phpunit/PHPUnit": "~4.0",
+        "php": ">=5.3.3",
+        "phpunit/PHPUnit": "3.7.*",
         "zendframework/zend-console": "self.version",
         "zendframework/zend-dom": "self.version",
         "zendframework/zend-eventmanager": "self.version",
