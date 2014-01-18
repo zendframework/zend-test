@@ -181,7 +181,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function getResponse()
     {
-        return $this->getApplication()->getMvcEvent()->getResponse();
+        return $this->getApplication()->getResponse();
     }
 
     /**
@@ -242,7 +242,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Dispatch the MVC with a URL
+     * Dispatch the MVC with an URL
      * Accept a HTTP (simulate a customer action) or console route.
      *
      * The URL provided set the request URI in the request object.
@@ -252,7 +252,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param  array|null $params
      * @throws \Exception
      */
-    public function dispatch($url, $method = null, $params = array(), $isXmlHttpRequest = false)
+    public function dispatch($url, $method = null, $params = array())
     {
         if ( !isset($method) &&
              $this->getRequest() instanceof HttpRequest &&
@@ -261,11 +261,6 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $method = $requestMethod;
         } elseif (!isset($method)) {
             $method = HttpRequest::METHOD_GET;
-        }
-
-        if ($isXmlHttpRequest) {
-            $headers = $this->getRequest()->getHeaders();
-            $headers->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
         }
 
         $this->url($url, $method, $params);
@@ -286,19 +281,16 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      *
      * @return AbstractControllerTestCase
      */
-    public function reset($keepPersistence = false)
+    public function reset()
     {
         // force to re-create all components
         $this->application = null;
 
         // reset server datas
-        if (!$keepPersistence) {
-            $_SESSION = array();
-            $_COOKIE  = array();
-        }
-
+        $_SESSION = array();
         $_GET     = array();
         $_POST    = array();
+        $_COOKIE  = array();
 
         // reset singleton
         StaticEventManager::resetInstance();
@@ -470,7 +462,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     {
         $routeMatch           = $this->getApplication()->getMvcEvent()->getRouteMatch();
         $controllerIdentifier = $routeMatch->getParam('controller');
-        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerManager');
+        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerLoader');
         $controllerClass      = $controllerManager->get($controllerIdentifier);
         return get_class($controllerClass);
     }
@@ -672,47 +664,5 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             ));
         }
         $this->assertNotEquals($route, $match);
-    }
-
-    /**
-     * Assert template name
-     * Assert that a template was used somewhere in the view model tree
-     *
-     * @param  string $templateName
-     */
-    public function assertTemplateName($templateName)
-    {
-        $viewModel = $this->getApplication()->getMvcEvent()->getViewModel();
-        $this->assertTrue($this->searchTemplates($viewModel, $templateName));
-    }
-
-    /**
-     * Assert not template name
-     * Assert that a template was not used somewhere in the view model tree
-     *
-     * @param  string $templateName
-     */
-    public function assertNotTemplateName($templateName)
-    {
-        $viewModel = $this->getApplication()->getMvcEvent()->getViewModel();
-        $this->assertFalse($this->searchTemplates($viewModel, $templateName));
-    }
-
-    /**
-     * Recursively search a view model and it's children for the given templateName
-     *
-     * @param ViewModel $viewModel
-     * @param string $templateName
-     * @return boolean
-     */
-    protected function searchTemplates($viewModel, $templateName)
-    {
-        if ($viewModel->getTemplate($templateName) == $templateName){
-            return true;
-        }
-        foreach ($viewModel->getChildren() as $child){
-            return $this->searchTemplates($child, $templateName);
-        }
-        return false;
     }
 }
