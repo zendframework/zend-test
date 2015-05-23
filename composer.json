@@ -15,18 +15,18 @@
     "require": {
         "php": ">=5.3.23",
         "phpunit/PHPUnit": "~4.0",
-        "zendframework/zend-console": "self.version",
-        "zendframework/zend-dom": "self.version",
-        "zendframework/zend-eventmanager": "self.version",
-        "zendframework/zend-http": "self.version",
-        "zendframework/zend-mvc": "self.version",
-        "zendframework/zend-servicemanager": "self.version",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-uri": "self.version",
-        "zendframework/zend-view": "self.version"
+        "zendframework/zend-console": "~2.4",
+        "zendframework/zend-dom": "~2.4",
+        "zendframework/zend-eventmanager": "~2.4",
+        "zendframework/zend-http": "~2.4",
+        "zendframework/zend-mvc": "~2.4",
+        "zendframework/zend-servicemanager": "~2.4",
+        "zendframework/zend-stdlib": "~2.4",
+        "zendframework/zend-uri": "~2.4",
+        "zendframework/zend-view": "~2.4"
     },
     "require-dev": {
-        "zendframework/zend-console": "self.version",
+        "zendframework/zend-console": "~2.4",
         "fabpot/php-cs-fixer": "1.7.*",
         "satooshi/php-coveralls": "dev-master",
         "phpunit/PHPUnit": "~4.0"
