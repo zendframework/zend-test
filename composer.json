@@ -26,10 +26,8 @@
         "zendframework/zend-view": "~2.4"
     },
     "require-dev": {
-        "zendframework/zend-console": "~2.4",
         "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
+        "satooshi/php-coveralls": "dev-master"
     },
     "suggest": {
         "zendframework/zend-console": "Zend\\Console component"
