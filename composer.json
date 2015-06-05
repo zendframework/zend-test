@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "php": ">=5.3.23",
+        "php": ">=5.5",
         "phpunit/PHPUnit": "~4.0",
         "zendframework/zend-console": "~2.5",
         "zendframework/zend-dom": "~2.5",
