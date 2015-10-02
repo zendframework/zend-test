@@ -34,9 +34,6 @@
         "zendframework/zend-serializer": "~2.5",
         "zendframework/zend-session": "~2.5"
     },
-    "suggest": {
-        "zendframework/zend-console": "Zend\\Console component"
-    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
