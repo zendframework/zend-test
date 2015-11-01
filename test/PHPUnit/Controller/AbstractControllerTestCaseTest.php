@@ -248,6 +248,12 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertNotMatchedRouteName('myroute');
     }
 
+    public function testAssertNoMatchedRoute()
+    {
+        $this->dispatch('/invalid');
+        $this->assertNoMatchedRoute();
+    }
+
     /**
      * Sample tests on Application errors events
      */

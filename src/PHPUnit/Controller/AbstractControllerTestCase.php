@@ -469,6 +469,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     protected function getControllerFullClassName()
     {
         $routeMatch           = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if(!$routeMatch) {
+            throw new PHPUnit_Framework_ExpectationFailedException('No route matched');
+        }
         $controllerIdentifier = $routeMatch->getParam('controller');
         $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerManager');
         $controllerClass      = $controllerManager->get($controllerIdentifier);
@@ -560,6 +563,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertControllerName($controller)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if(!$routeMatch) {
+            throw new PHPUnit_Framework_ExpectationFailedException('No route matched');
+        }
         $match      = $routeMatch->getParam('controller');
         $match      = strtolower($match);
         $controller = strtolower($controller);
@@ -579,6 +585,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotControllerName($controller)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if(!$routeMatch) {
+            throw new PHPUnit_Framework_ExpectationFailedException('No route matched');
+        }
         $match      = $routeMatch->getParam('controller');
         $match      = strtolower($match);
         $controller = strtolower($controller);
@@ -598,6 +607,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertActionName($action)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if(!$routeMatch) {
+            throw new PHPUnit_Framework_ExpectationFailedException('No route matched');
+        }
         $match      = $routeMatch->getParam('action');
         $match      = strtolower($match);
         $action     = strtolower($action);
@@ -617,6 +629,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotActionName($action)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if(!$routeMatch) {
+            throw new PHPUnit_Framework_ExpectationFailedException('No route matched');
+        }
         $match      = $routeMatch->getParam('action');
         $match      = strtolower($match);
         $action     = strtolower($action);
@@ -636,6 +651,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertMatchedRouteName($route)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if(!$routeMatch) {
+            throw new PHPUnit_Framework_ExpectationFailedException('No route matched');
+        }
         $match      = $routeMatch->getMatchedRouteName();
         $match      = strtolower($match);
         $route      = strtolower($route);
@@ -655,6 +673,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotMatchedRouteName($route)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if(!$routeMatch) {
+            throw new PHPUnit_Framework_ExpectationFailedException('No route matched');
+        }
         $match      = $routeMatch->getMatchedRouteName();
         $match      = strtolower($match);
         $route      = strtolower($route);
@@ -664,6 +685,23 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             );
         }
         $this->assertNotEquals($route, $match);
+    }
+
+    /**
+     * Assert that the application did not match any route
+     */
+    public function assertNoMatchedRoute()
+    {
+        $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        if($routeMatch) {
+            $match      = $routeMatch->getMatchedRouteName();
+            $match      = strtolower($match);
+            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                    'Failed asserting that no route matched, actual matched route name is "%s"',
+                    $match
+            ));
+        }
+        $this->assertNull($routeMatch);
     }
 
     /**
