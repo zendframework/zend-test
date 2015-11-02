@@ -267,28 +267,28 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertControllerName('something');
     }
-    
+
     public function testNotControllerNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotControllerName('something');
     }
-    
+
     public function testActionNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertActionName('something');
     }
-    
+
     public function testNotActionNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotActionName('something');
     }
-    
+
     public function testMatchedRouteNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
