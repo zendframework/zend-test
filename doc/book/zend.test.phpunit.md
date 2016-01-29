@@ -135,15 +135,15 @@ It's often useful to assert against the last run action, controller, and module;
 may want to assert against the route that was matched. The following assertions can help you in this
 regard:
 
-- `assertModulesLoaded(array $modules)`: Assert that the given modules was loaded by the
+* `assertModulesLoaded(array $modules)`: Assert that the given modules was loaded by the
 application.
-- `assertModuleName($module)`: Assert that the given module was used in the last dispatched action.
-- `assertControllerName($controller)`: Assert that the given controller identifier was selected in
+* `assertModuleName($module)`: Assert that the given module was used in the last dispatched action.
+* `assertControllerName($controller)`: Assert that the given controller identifier was selected in
 the last dispatched action.
-- `assertControllerClass($controller)`: Assert that the given controller class was selected in the
+* `assertControllerClass($controller)`: Assert that the given controller class was selected in the
 last dispatched action.
-- `assertActionName($action)`: Assert that the given action was last dispatched.
-- `assertMatchedRouteName($route)`: Assert that the given named route was matched by the router.
+* `assertActionName($action)`: Assert that the given action was last dispatched.
+* `assertMatchedRouteName($route)`: Assert that the given named route was matched by the router.
 
 Each also has a 'Not' variant for negative assertions.
 
@@ -160,18 +160,18 @@ additional arguments and/or an error message, based on the assertion type. You c
 for writing the CSS selectors in the `Zend\Dom\Query` \[Theory of
 Operation\](zend.dom.query.operation) chapter. Query assertions include:
 
-- `assertQuery($path)`: assert that one or more DOM elements matching the given CSS selector are
+* `assertQuery($path)`: assert that one or more DOM elements matching the given CSS selector are
 present.
-- `assertQueryContentContains($path, $match)`: assert that one or more DOM elements matching the
+* `assertQueryContentContains($path, $match)`: assert that one or more DOM elements matching the
 given CSS selector are present, and that at least one contains the content provided in $match.
-- `assertQueryContentRegex($path, $pattern)`: assert that one or more DOM elements matching the
+* `assertQueryContentRegex($path, $pattern)`: assert that one or more DOM elements matching the
 given CSS selector are present, and that at least one matches the regular expression provided in
 $pattern. If a $message is present, it will be prepended to any failed assertion message.
-- `assertQueryCount($path, $count)`: assert that there are exactly $count DOM elements matching the
+* `assertQueryCount($path, $count)`: assert that there are exactly $count DOM elements matching the
 given CSS selector present.
-- `assertQueryCountMin($path, $count)`: assert that there are at least $count DOM elements matching
+* `assertQueryCountMin($path, $count)`: assert that there are at least $count DOM elements matching
 the given CSS selector present.
-- `assertQueryCountMax($path, $count)`: assert that there are no more than $count DOM elements
+* `assertQueryCountMax($path, $count)`: assert that there are no more than $count DOM elements
 matching the given CSS selector present.
 
 Additionally, each of the above has a 'Not' variant that provides a negative assertion:
@@ -184,16 +184,16 @@ be obvious reasons.)
 Some developers are more familiar with XPath than with CSS selectors, and thus XPath variants of all
 the Query assertions are also provided. These are:
 
-- `assertXpathQuery($path)`
-- `assertNotXpathQuery($path)`
-- `assertXpathQueryCount($path, $count)`
-- `assertNotXpathQueryCount($path, $count)`
-- `assertXpathQueryCountMin($path, $count)`
-- `assertXpathQueryCountMax($path, $count)`
-- `assertXpathQueryContentContains($path, $match)`
-- `assertNotXpathQueryContentContains($path, $match)`
-- `assertXpathQueryContentRegex($path, $pattern)`
-- `assertNotXpathQueryContentRegex($path, $pattern)`
+* `assertXpathQuery($path)`
+* `assertNotXpathQuery($path)`
+* `assertXpathQueryCount($path, $count)`
+* `assertNotXpathQueryCount($path, $count)`
+* `assertXpathQueryCountMin($path, $count)`
+* `assertXpathQueryCountMax($path, $count)`
+* `assertXpathQueryContentContains($path, $match)`
+* `assertNotXpathQueryContentContains($path, $match)`
+* `assertXpathQueryContentRegex($path, $pattern)`
+* `assertNotXpathQueryContentRegex($path, $pattern)`
 
 **Redirect Assertions**
 
@@ -216,12 +216,12 @@ response codes and headers -- for instance, to determine whether an action resul
 response, or to ensure that JSON responses contain the appropriate Content-Type header. The
 following assertions are available.
 
-- `assertResponseStatusCode($code)`: assert that the response resulted in the given HTTP response
+* `assertResponseStatusCode($code)`: assert that the response resulted in the given HTTP response
 code.
-- `assertResponseHeader($header)`: assert that the response contains the given header.
-- `assertResponseHeaderContains($header, $match)`: assert that the response contains the given
+* `assertResponseHeader($header)`: assert that the response contains the given header.
+* `assertResponseHeaderContains($header, $match)`: assert that the response contains the given
 header and that its content contains the given string.
-- `assertResponseHeaderRegex($header, $pattern)`: assert that the response contains the given header
+* `assertResponseHeaderRegex($header, $pattern)`: assert that the response contains the given header
 and that its content matches the given regex.
 
 Additionally, each of the above assertions have a 'Not' variant for negative assertions.
