@@ -18,7 +18,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#6](https://github.com/zendframework/zend-test/pull/6) updates the
+  `AbstractControllerTestCase` to mark a test as failed if no route match occurs
+  in a number of assertions that require a route match.
 
 ## 2.5.2 - 2015-12-09
 

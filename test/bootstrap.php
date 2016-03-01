@@ -32,3 +32,8 @@ require __DIR__ . '/../vendor/autoload.php';
 if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
     ob_start();
 }
+
+/**
+ * Prevent failures due to deprecation notices.
+ */
+PHPUnit_Framework_Error_Deprecated::$enabled = false;
