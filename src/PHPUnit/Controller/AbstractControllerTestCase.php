@@ -292,9 +292,13 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         // force to re-create all components
         $this->application = null;
 
-        // reset server datas
+        // reset server data
         if (!$keepPersistence) {
-            $_SESSION = [];
+            /* Do not create a global session variable if it doesn't already exist.
+               Otherwise calling this function could mark tests risky, as it changes global state. */
+            if (array_key_exists('_SESSION', $GLOBALS)) {
+                $_SESSION = [];
+            }
             $_COOKIE  = [];
         }
 

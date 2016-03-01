@@ -549,6 +549,10 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertWithMultiDispatchWithoutPersistence()
     {
+        if (!extension_loaded('session')) {
+            $this->markTestSkipped('No session module loaded');
+        }
+
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
@@ -573,6 +577,10 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertWithMultiDispatchWithPersistence()
     {
+        if (!extension_loaded('session')) {
+            $this->markTestSkipped('No session module loaded');
+        }
+
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
