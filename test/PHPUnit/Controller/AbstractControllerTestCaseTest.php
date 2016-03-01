@@ -248,6 +248,68 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertNotMatchedRouteName('myroute');
     }
 
+    public function testAssertNoMatchedRoute()
+    {
+        $this->dispatch('/invalid');
+        $this->assertNoMatchedRoute();
+    }
+
+    public function testAssertNoMatchedRouteWithMatchedRoute()
+    {
+        $this->dispatch('/tests');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertNoMatchedRoute();
+    }
+
+    public function testControllerNameWithNoRouteMatch()
+    {
+        $this->dispatch('/invalid');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertControllerName('something');
+    }
+
+    public function testNotControllerNameWithNoRouteMatch()
+    {
+        $this->dispatch('/invalid');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertNotControllerName('something');
+    }
+
+    public function testActionNameWithNoRouteMatch()
+    {
+        $this->dispatch('/invalid');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertActionName('something');
+    }
+
+    public function testNotActionNameWithNoRouteMatch()
+    {
+        $this->dispatch('/invalid');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertNotActionName('something');
+    }
+
+    public function testMatchedRouteNameWithNoRouteMatch()
+    {
+        $this->dispatch('/invalid');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertMatchedRouteName('something');
+    }
+
+    public function testNotMatchedRouteNameWithNoRouteMatch()
+    {
+        $this->dispatch('/invalid');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertNotMatchedRouteName('something');
+    }
+
+    public function testControllerClassWithNoRoutematch()
+    {
+        $this->dispatch('/invalid');
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertControllerClass('something');
+    }
+
     /**
      * Sample tests on Application errors events
      */
