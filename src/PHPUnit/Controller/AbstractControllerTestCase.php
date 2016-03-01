@@ -294,8 +294,9 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
         // reset server data
         if (!$keepPersistence) {
-            /* Do not create a global session variable if it doesn't already exist.
-               Otherwise calling this function could mark tests risky, as it changes global state. */
+            // Do not create a global session variable if it doesn't already
+            // exist. Otherwise calling this function could mark tests risky,
+            // as it changes global state.
             if (array_key_exists('_SESSION', $GLOBALS)) {
                 $_SESSION = [];
             }
@@ -701,8 +702,8 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $match      = $routeMatch->getMatchedRouteName();
             $match      = strtolower($match);
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                    'Failed asserting that no route matched, actual matched route name is "%s"',
-                    $match
+                'Failed asserting that no route matched, actual matched route name is "%s"',
+                $match
             ));
         }
         $this->assertNull($routeMatch);

@@ -421,7 +421,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testResetDoesNotCreateSessionIfNoSessionExists()
     {
-        if (!extension_loaded('session')) {
+        if (! extension_loaded('session')) {
             $this->markTestSkipped('No session extension loaded');
         }
 
