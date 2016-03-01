@@ -44,7 +44,8 @@ class ModuleLoader
         }
 
         $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : [];
-        $this->serviceManager = new ServiceManager(new Service\ServiceManagerConfig($smConfig));
+        $this->serviceManager = new ServiceManager();
+        (new Service\ServiceManagerConfig($smConfig))->configureServiceManager($this->serviceManager);
         $this->serviceManager->setService('ApplicationConfig', $configuration);
         $this->serviceManager->get('ModuleManager')->loadModules();
     }
