@@ -418,4 +418,15 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/custom-response');
         $this->assertResponseStatusCode(999);
     }
+
+    public function testResetDoesNotCreateSessionIfNoSessionExists()
+    {
+        if (! extension_loaded('session')) {
+            $this->markTestSkipped('No session extension loaded');
+        }
+
+        $this->reset();
+
+        $this->assertFalse(array_key_exists('_SESSION', $GLOBALS));
+    }
 }
