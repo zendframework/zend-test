@@ -549,6 +549,10 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertWithMultiDispatchWithoutPersistence()
     {
+        if (! extension_loaded('session')) {
+            $this->markTestSkipped('No session extension loaded');
+        }
+
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
@@ -573,6 +577,10 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertWithMultiDispatchWithPersistence()
     {
+        if (! extension_loaded('session')) {
+            $this->markTestSkipped('No session extension loaded');
+        }
+
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
@@ -607,14 +615,18 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->assertEquals(true, StaticEventManager::hasInstance());
         $countListeners = count(StaticEventManager::getInstance()->getListeners(
-            'Zend\Mvc\Application', MvcEvent::EVENT_FINISH));
+            'Zend\Mvc\Application',
+            MvcEvent::EVENT_FINISH
+        ));
         $this->assertEquals(1, $countListeners);
 
         $this->reset();
 
         $this->assertEquals(false, StaticEventManager::hasInstance());
         $countListeners = StaticEventManager::getInstance()->getListeners(
-            'Zend\Mvc\Application', MvcEvent::EVENT_FINISH);
+            'Zend\Mvc\Application',
+            MvcEvent::EVENT_FINISH
+        );
         $this->assertEquals(false, $countListeners);
 
         $this->dispatch('/tests-bis');
