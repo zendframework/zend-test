@@ -14,7 +14,7 @@
     },
     "require": {
         "php": "^5.5 || ^7.0",
-        "phpunit/phpunit": "~4.0 || ~5.0",
+        "phpunit/phpunit": "^4.5 || ^5.0",
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
