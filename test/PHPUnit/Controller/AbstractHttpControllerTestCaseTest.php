@@ -605,6 +605,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertWithEventShared()
     {
+        if (! class_exists(StaticEventManager::class)) {
+            $this->markTestSkipped(
+                'StaticEventManager tests are unnecessary and impossible under zend-servicemanager v3'
+            );
+        }
+
         $this->setApplicationConfig(
             include __DIR__ . '/../../_files/application.config.with.shared.events.php'
         );
