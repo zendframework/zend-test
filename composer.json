@@ -28,6 +28,7 @@
     },
     "require-dev": {
         "fabpot/php-cs-fixer": "1.7.*",
+        "symfony/finder": "^2.2",
         "mikey179/vfsStream": "~1.2",
         "zendframework/zend-i18n": "^2.6",
         "zendframework/zend-log": "^2.7.1",
