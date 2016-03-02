@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 2.6.1 - TBD
+## 2.6.1 - 2016-03-02
 
 ### Added
 
@@ -36,7 +36,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#20](https://github.com/zendframework/zend-test/pull/20) updates the zend-mvc
+  requirement to 2.7.1, ensuring deprecation notices will not occur in the
+  majority of circumstances.
 
 ## 2.6.0 - 2016-03-01
 
