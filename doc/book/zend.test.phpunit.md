@@ -8,8 +8,6 @@ The following is a simple test case for a IndexController to verify things like 
 controller and action name :
 
 ```php
-<?php
-
 namespace ApplicationTest\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
@@ -64,8 +62,6 @@ Once the application is set up, you can write your tests. To help debug tests, y
 flag `traceError` to throw MVC exception during the tests writing :
 
 ```php
-<?php
-
 namespace ApplicationTest\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
