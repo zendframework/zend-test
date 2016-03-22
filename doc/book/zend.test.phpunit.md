@@ -129,7 +129,7 @@ Assertions are at the heart of Unit Testing; you use them to verify that the res
 expect. To this end, `Zend\Test\PHPUnit\AbstractControllerTestCase` provides a number of assertions
 to make testing your MVC apps and controllers simpler.
 
-**Request Assertions**
+#### Request Assertions
 
 It's often useful to assert against the last run action, controller, and module; additionally, you
 may want to assert against the route that was matched. The following assertions can help you in this
@@ -147,7 +147,7 @@ last dispatched action.
 
 Each also has a 'Not' variant for negative assertions.
 
-**CSS Selector Assertions**
+#### CSS Selector Assertions
 
 CSS selectors are an easy way to verify that certain artifacts are present in the response content.
 They also make it trivial to ensure that items necessary for Javascript UIs and/or AJAX integration
@@ -179,7 +179,7 @@ assertNotQuery(), assertNotQueryContentContains(), assertNotQueryContentRegex(),
 assertNotQueryCount(). (Note that the min and max counts do not have these variants, for what should
 be obvious reasons.)
 
-**XPath Assertions**
+#### XPath Assertions
 
 Some developers are more familiar with XPath than with CSS selectors, and thus XPath variants of all
 the Query assertions are also provided. These are:
@@ -195,7 +195,7 @@ the Query assertions are also provided. These are:
 - `assertXpathQueryContentRegex($path, $pattern)`
 - `assertNotXpathQueryContentRegex($path, $pattern)`
 
-**Redirect Assertions**
+#### Redirect Assertions
 
 Often an action will redirect. Instead of following the redirect,
 `Zend\Test\PHPUnit\ControllerTestCase` allows you to test for redirects with a handful of
@@ -209,7 +209,7 @@ Location header matches the regular expression provided by $pattern.
 
 Each also has a 'Not' variant for negative assertions.
 
-**Response Header Assertions**
+#### Response Header Assertions
 
 In addition to checking for redirect headers, you will often need to check for specific HTTP
 response codes and headers -- for instance, to determine whether an action results in a 404 or 500
