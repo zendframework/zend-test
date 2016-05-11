@@ -6,9 +6,9 @@
 .*.sw*
 .*.un~
 nbproject
+doc/html/
 tmp/
 vendor/
-doc/html/
 zf-mkdoc-theme/
 
 clover.xml
