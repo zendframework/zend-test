@@ -1,0 +1,11 @@
+docs_dir: doc/book
+site_dir: doc/html
+pages:
+    - index.md
+    - Introduction: intro.md
+    - "Unit testing with PHPUnit": phpunit.md
+    - Assertions: assertions.md
+site_name: zend-test
+site_description: zend-test
+repo_url: 'https://github.com/zendframework/zend-test'
+copyright: 'Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'

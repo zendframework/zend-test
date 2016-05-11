@@ -8,6 +8,8 @@
 nbproject
 tmp/
 vendor/
+doc/html/
+zf-mkdoc-theme/
 
 clover.xml
 coveralls-upload.json
