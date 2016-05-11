@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Assertions - zend-test</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-test</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../phpunit/">Unit testing with PHPUnit</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Assertions</a>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-test">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#assertions">Assertions</a></li>
+        
+            <li><a href="#request-assertions">Request Assertions</a></li>
+        
+            <li><a href="#css-selector-assertions">CSS Selector Assertions</a></li>
+        
+            <li><a href="#xpath-assertions">XPath Assertions</a></li>
+        
+            <li><a href="#redirect-assertions">Redirect Assertions</a></li>
+        
+            <li><a href="#response-header-assertions">Response Header Assertions</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../phpunit/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next disabled ">
+        <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+  
+  <li class="active">Assertions</li>
+</ol>
+
+<h1 id="assertions">Assertions</h1>
+<p>Assertions are at the heart of unit testing; you use them to verify that the
+results are what you expect. To this end, <code>Zend\Test\PHPUnit\AbstractControllerTestCase</code>
+provides a number of assertions to make testing your MVC apps and controllers
+simpler.</p>
+<h2 id="request-assertions">Request Assertions</h2>
+<p>It's often useful to assert against the last run action, controller, and module;
+additionally, you may want to assert against the route that was matched. The
+following assertions can help you in this regard:</p>
+<ul>
+<li><code>assertModulesLoaded(array $modules)</code>: Assert that the given modules were
+  loaded by the application.</li>
+<li><code>assertModuleName($module)</code>: Assert that the given module was used in the last
+  dispatched action.</li>
+<li><code>assertControllerName($controller)</code>: Assert that the given controller
+  identifier was selected in the last dispatched action.</li>
+<li><code>assertControllerClass($controller)</code>: Assert that the given controller class
+  was selected in the last dispatched action.</li>
+<li><code>assertActionName($action)</code>: Assert that the given action was last dispatched.</li>
+<li><code>assertMatchedRouteName($route)</code>: Assert that the given named route was
+  matched by the router.</li>
+</ul>
+<p>Each also has a 'Not' variant for negative assertions.</p>
+<h2 id="css-selector-assertions">CSS Selector Assertions</h2>
+<p>CSS selectors are an easy way to verify that certain artifacts are present in
+the response content.  They also make it trivial to ensure that items necessary
+for JavaScript UIs and/or AJAX integration will be present; most JS toolkits
+provide some mechanism for manipulating DOM elements based on CSS selectors, so
+the syntax would be the same.</p>
+<p>This functionality is provided via <a href="https://zendframework.github.io/zend-dom/query/">Zend\Dom\Query</a>,
+and integrated into a set of 'Query' assertions. Each of these assertions takes
+as their first argument a CSS selector, with optionally additional arguments
+and/or an error message, based on the assertion type. You can find the rules for
+writing the CSS selectors in the zend-dom <a href="https://zendframework.github.io/zend-dom/query/#theory-of-operation">Theory of Operation</a>
+chapter. Query assertions include:</p>
+<ul>
+<li><code>assertQuery($path)</code>: assert that one or more DOM elements matching the given
+  CSS selector are present.</li>
+<li><code>assertQueryContentContains($path, $match)</code>: assert that one or more DOM
+  elements matching the given CSS selector are present, and that at least one
+  contains the content provided in <code>$match</code>.</li>
+<li><code>assertQueryContentRegex($path, $pattern)</code>: assert that one or more DOM
+  elements matching the given CSS selector are present, and that at least one
+  matches the regular expression provided in <code>$pattern</code>.</li>
+<li><code>assertQueryCount($path, $count)</code>: assert that there are exactly <code>$count</code> DOM
+  elements matching the given CSS selector present.</li>
+<li><code>assertQueryCountMin($path, $count)</code>: assert that there are at least <code>$count</code>
+  DOM elements matching the given CSS selector present.</li>
+<li><code>assertQueryCountMax($path, $count)</code>: assert that there are no more than
+  <code>$count</code> DOM elements matching the given CSS selector present.</li>
+</ul>
+<p>All queries above also allow an optional <code>$message</code> argument; when provided,
+that message will be used when displaying assertion failures.</p>
+<p>Additionally, each of the above has a 'Not' variant that provides a negative
+assertion: <code>assertNotQuery()</code>, <code>assertNotQueryContentContains()</code>,
+<code>assertNotQueryContentRegex()</code>, and <code>assertNotQueryCount()</code>. (Note that the min
+and max counts do not have these variants, for what should be obvious reasons.)</p>
+<h2 id="xpath-assertions">XPath Assertions</h2>
+<p>Some developers are more familiar with XPath than with CSS selectors, and thus
+XPath variants of all the Query assertions are also provided. These are:</p>
+<ul>
+<li><code>assertXpathQuery($path)</code></li>
+<li><code>assertNotXpathQuery($path)</code></li>
+<li><code>assertXpathQueryCount($path, $count)</code></li>
+<li><code>assertNotXpathQueryCount($path, $count)</code></li>
+<li><code>assertXpathQueryCountMin($path, $count)</code></li>
+<li><code>assertXpathQueryCountMax($path, $count)</code></li>
+<li><code>assertXpathQueryContentContains($path, $match)</code></li>
+<li><code>assertNotXpathQueryContentContains($path, $match)</code></li>
+<li><code>assertXpathQueryContentRegex($path, $pattern)</code></li>
+<li><code>assertNotXpathQueryContentRegex($path, $pattern)</code></li>
+</ul>
+<h2 id="redirect-assertions">Redirect Assertions</h2>
+<p>Often an action will redirect. Instead of following the redirect,
+<code>Zend\Test\PHPUnit\ControllerTestCase</code> allows you to test for redirects with a
+handful of assertions.</p>
+<ul>
+<li><code>assertRedirect()</code>: assert simply that a redirect has occurred.</li>
+<li><code>assertRedirectTo($url)</code>: assert that a redirect has occurred, and that the
+  value of the <code>Location</code> header is the <code>$url</code> provided.</li>
+<li><code>assertRedirectRegex($pattern)</code>: assert that a redirect has occurred, and that
+  the value of the <code>Location</code> header matches the regular expression provided by
+  <code>$pattern</code>.</li>
+</ul>
+<p>Each also has a 'Not' variant for negative assertions.</p>
+<h2 id="response-header-assertions">Response Header Assertions</h2>
+<p>In addition to checking for redirect headers, you will often need to check for specific HTTP
+response codes and headers; for instance, to determine whether an action results in a 404 or 500
+response, or to ensure that JSON responses contain the appropriate <code>Content-Type</code> header. The
+following assertions are available.</p>
+<ul>
+<li><code>assertResponseStatusCode($code)</code>: assert that the response resulted in the
+  given HTTP response code.</li>
+<li><code>assertResponseHeader($header)</code>: assert that the response contains the given
+  header.</li>
+<li><code>assertResponseHeaderContains($header, $match)</code>: assert that the response
+  contains the given header and that its content contains the given string.</li>
+<li><code>assertResponseHeaderRegex($header, $pattern)</code>: assert that the response
+  contains the given header and that its content matches the given regex.</li>
+</ul>
+<p>Additionally, each of the above assertions have a 'Not' variant for negative assertions.</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../phpunit/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next disabled ">
+      <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>
