@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "php": "^5.5 || ^7.0",
+        "php": "^5.6 || ^7.0",
         "phpunit/phpunit": "^4.0 || ^5.0",
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-dom": "^2.6",
@@ -36,7 +36,8 @@
         "zendframework/zend-serializer": "^2.6.1",
         "zendframework/zend-session": "^2.6.2",
         "zendframework/zend-mvc-plugin-flashmessenger": "^0.1.0",
-        "zendframework/zend-mvc-console": "^1.1.8"
+        "zendframework/zend-mvc-console": "^1.1.8",
+        "zendframework/zend-validator": "^2.8"
     },
     "extra": {
         "branch-alias": {
