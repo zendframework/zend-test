@@ -1,6 +1,8 @@
 <?php
 return array(
     'modules' => array(
+        'Zend\Router',
+        'Zend\Validator',
         'Baz',
         'ModuleWithEvents',
     ),

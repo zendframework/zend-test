@@ -31,7 +31,10 @@ class ModuleLoader
                 'module_listener_options' => [
                     'module_paths' => [],
                 ],
-                'modules' => [],
+                'modules' => [
+                    'Zend\Router',
+                    'Zend\Validator',
+                ],
             ];
             foreach ($modules as $key => $module) {
                 if (is_numeric($key)) {

@@ -10,7 +10,7 @@ namespace ZendTest\Test\PHPUnit\Controller;
 
 use Zend\EventManager\StaticEventManager;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\Http\RouteMatch;
+use Zend\Router\Http\RouteMatch;
 use Zend\Stdlib\Parameters;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\View\Model\ViewModel;
@@ -556,7 +556,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
+                            ->get('ControllerManager')
                             ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();
@@ -567,7 +567,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
+                            ->get('ControllerManager')
                             ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();
@@ -584,7 +584,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
+                            ->get('ControllerManager')
                             ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();
@@ -595,7 +595,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
+                            ->get('ControllerManager')
                             ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();

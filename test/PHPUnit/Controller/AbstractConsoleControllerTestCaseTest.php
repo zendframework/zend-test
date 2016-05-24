@@ -8,6 +8,7 @@
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use Zend\Router\RouteMatch;
 use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
 /**
@@ -95,6 +96,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     {
         $this->dispatch('filter --date="2013-03-07 00:00:00" --id=10 --text="custom text"');
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertInstanceOf(RouteMatch::class, $routeMatch, 'Did not receive a route match?');
         $this->assertEquals("2013-03-07 00:00:00", $routeMatch->getParam('date'));
         $this->assertEquals("10", $routeMatch->getParam('id'));
         $this->assertEquals("custom text", $routeMatch->getParam('text'));
@@ -124,6 +126,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     {
         $this->dispatch('filter --date "2013-03-07 00:00:00" --id=10 --text="custom text"');
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertInstanceOf(RouteMatch::class, $routeMatch, 'Did not receive a route match?');
         $this->assertEquals("2013-03-07 00:00:00", $routeMatch->getParam('date'));
         $this->assertEquals("10", $routeMatch->getParam('id'));
         $this->assertEquals("custom text", $routeMatch->getParam('text'));
