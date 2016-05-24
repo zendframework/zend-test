@@ -39,6 +39,9 @@
         "zendframework/zend-mvc-console": "^1.1.8",
         "zendframework/zend-validator": "^2.8"
     },
+    "suggest": {
+        "zendframework/zend-mvc-console": "^1.1.8, to test MVC <-> console integration"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.6-dev",
