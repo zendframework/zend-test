@@ -6,6 +6,10 @@ if (!is_dir($cacheDir)) {
 
 return array(
     'modules' => array(
+        'Zend\Router',
+        'Zend\Validator',
+        'Zend\Mvc\Console',
+        'Zend\Mvc\Plugin\FlashMessenger',
         'Baz',
     ),
     'module_listener_options' => array(

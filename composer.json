@@ -19,7 +19,7 @@
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
         "zendframework/zend-http": "^2.5.4",
-        "zendframework/zend-mvc": "^2.7.1",
+        "zendframework/zend-mvc": "^3.0.0-dev || ^3.0",
         "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
         "zendframework/zend-stdlib": "^2.7 || ^3.0",
         "zendframework/zend-uri": "^2.5",
@@ -34,12 +34,14 @@
         "zendframework/zend-log": "^2.7.1",
         "zendframework/zend-modulemanager": "^2.7.1",
         "zendframework/zend-serializer": "^2.6.1",
-        "zendframework/zend-session": "^2.6.2"
+        "zendframework/zend-session": "^2.6.2",
+        "zendframework/zend-mvc-plugin-flashmessenger": "^0.1.0",
+        "zendframework/zend-mvc-console": "^1.1.8"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "2.6-dev",
-            "dev-develop": "2.7-dev"
+            "dev-develop": "3.0-dev"
         }
     },
     "autoload-dev": {
