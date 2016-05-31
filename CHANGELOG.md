@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0 - 2016-05-31
+
+### Added
+
+- This release adds support for zend-mvc v3.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- This release removes support for PHP versions `< 5.6`.
+- This release removes support for zend-mvc v2.
+
+### Fixed
+
+- Nothing.
+
 ## 2.6.2 - TBD
 
 ### Added
