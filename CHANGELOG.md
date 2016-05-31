@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.0 - TBD
+## 3.0.0 - 2016-05-31
 
 ### Added
 
@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Removed
 
 - This release removes support for PHP versions `< 5.6`.
+- This release removes support for zend-mvc v2.
 
 ### Fixed
 
