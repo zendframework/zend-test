@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.1 - TBD
+## 3.0.1 - 2016-06-15
 
 ### Added
 
@@ -18,7 +18,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#26](https://github.com/zendframework/zend-test/pull/26) fixes how
+  `$traceErrors` works under PHP 7 and PHPUnit 5. Any zend-test-specific
+  assertion failures now append a list of all exception messages to the base
+  message when the flag is enabled.
 
 ## 3.0.0 - 2016-05-31
 

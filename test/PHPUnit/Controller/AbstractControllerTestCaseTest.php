@@ -10,6 +10,8 @@ namespace ZendTest\Test\PHPUnit\Controller;
 
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use PHPUnit_Framework_ExpectationFailedException;
+use RuntimeException;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
@@ -22,6 +24,9 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
  */
 class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
+    protected $traceError = true;
+    protected $traceErrorCache = true;
+
     public function tearDownCacheDir()
     {
         vfsStreamWrapper::register();
@@ -43,6 +48,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     protected function setUp()
     {
+        $this->traceErrorCache = $this->traceError;
         $this->tearDownCacheDir();
         Console::overrideIsConsole(null);
         $this->setApplicationConfig(
@@ -53,6 +59,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     protected function tearDown()
     {
+        $this->traceError = $this->traceErrorCache;
         $this->tearDownCacheDir();
         parent::tearDown();
     }
@@ -137,6 +144,54 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
             'actual module name is "baz"' // check actual module is display
         );
         $this->assertModuleName('Application');
+    }
+
+    public function testAssertExceptionDetailsPresentWhenTraceErrorIsEnabled()
+    {
+        $this->traceError = true;
+        $this->dispatch('/tests');
+        $this->getApplication()->getMvcEvent()->setParam(
+            'exception',
+            new RuntimeException('Expected exception message')
+        );
+
+        $caught = false;
+        try {
+            $this->assertModuleName('Application');
+        } catch (PHPUnit_Framework_ExpectationFailedException $ex) {
+            $caught = true;
+            $message = $ex->getMessage();
+        }
+
+        $this->assertTrue($caught, 'Did not catch expected exception!');
+
+        $this->assertContains('actual module name is "baz"', $message);
+        $this->assertContains("Exception 'RuntimeException' with message 'Expected exception message'", $message);
+        $this->assertContains(__FILE__, $message);
+    }
+
+    public function testAssertExceptionDetailsNotPresentWhenTraceErrorIsDisabled()
+    {
+        $this->traceError = false;
+        $this->dispatch('/tests');
+        $this->getApplication()->getMvcEvent()->setParam(
+            'exception',
+            new RuntimeException('Expected exception message')
+        );
+
+        $caught = false;
+        try {
+            $this->assertModuleName('Application');
+        } catch (PHPUnit_Framework_ExpectationFailedException $ex) {
+            $caught = true;
+            $message = $ex->getMessage();
+        }
+
+        $this->assertTrue($caught, 'Did not catch expected exception!');
+
+        $this->assertContains('actual module name is "baz"', $message);
+        $this->assertNotContains("Exception 'RuntimeException' with message 'Expected exception message'", $message);
+        $this->assertNotContains(__FILE__, $message);
     }
 
     public function testAssertNotModuleName()
