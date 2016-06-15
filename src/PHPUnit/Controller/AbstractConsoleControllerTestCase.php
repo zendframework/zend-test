@@ -29,13 +29,13 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
     {
         $response = $this->getResponse();
         if (false === stripos($response->getContent(), $match)) {
-            throw new PHPUnit_Framework_ExpectationFailedException(
+            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
                 sprintf(
                     'Failed asserting output CONTAINS content "%s", actual content is "%s"',
                     $match,
                     $response->getContent()
                 )
-            );
+            ));
         }
         $this->assertNotSame(false, stripos($response->getContent(), $match));
     }
@@ -50,10 +50,10 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
     {
         $response = $this->getResponse();
         if (false !== stripos($response->getContent(), $match)) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting output DOES NOT CONTAIN content "%s"',
                 $match
-            ));
+            )));
         }
         $this->assertSame(false, stripos($response->getContent(), $match));
     }
