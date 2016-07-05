@@ -131,4 +131,27 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertEquals("10", $routeMatch->getParam('id'));
         $this->assertEquals("custom text", $routeMatch->getParam('text'));
     }
+
+    public function testAssertMatchedArgumentsWithLiteralFlags()
+    {
+        $this->dispatch('literal --foo --bar');
+        $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertInstanceOf(RouteMatch::class, $routeMatch, 'Did not receive a route match?');
+        $this->assertMatchedRouteName('arguments-literal');
+        $this->assertTrue($routeMatch->getParam('foo'));
+        $this->assertTrue($routeMatch->getParam('bar'));
+        $this->assertFalse($routeMatch->getParam('optional'));
+        $this->assertNull($routeMatch->getParam('doo'));
+
+        $this->reset();
+
+        $this->dispatch('literal --foo --bar --doo test');
+        $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertInstanceOf(RouteMatch::class, $routeMatch, 'Did not receive a route match?');
+        $this->assertMatchedRouteName('arguments-literal');
+        $this->assertTrue($routeMatch->getParam('foo'));
+        $this->assertTrue($routeMatch->getParam('bar'));
+        $this->assertFalse($routeMatch->getParam('optional'));
+        $this->assertSame('test', $routeMatch->getParam('doo'));
+    }
 }
