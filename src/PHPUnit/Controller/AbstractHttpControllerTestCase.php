@@ -803,13 +803,18 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
             )));
         }
 
+        $found      = false;
         $nodeValues = [];
 
         foreach ($result as $node) {
             $nodeValues[] = $node->nodeValue;
+            if (preg_match($pattern, $node->nodeValue)) {
+                $found = true;
+                break;
+            }
         }
 
-        if (!preg_match($pattern, implode('', $nodeValues))) {
+        if (! $found) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node denoted by %s CONTAINS content MATCHING "%s", actual content is "%s"',
                 $path,
@@ -817,7 +822,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 implode('', $nodeValues)
             )));
         }
-        $this->assertTrue((bool) preg_match($pattern, implode('', $nodeValues)));
+
+        $this->assertTrue($found);
     }
 
     /**
