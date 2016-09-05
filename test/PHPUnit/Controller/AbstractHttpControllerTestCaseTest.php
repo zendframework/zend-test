@@ -426,6 +426,17 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryContentRegex('div.top', '#o{3,}#');
     }
 
+    public function testAssertQueryContentRegexMultipleMatchesNoFalsePositive()
+    {
+        $this->dispatch('/tests');
+
+        $this->setExpectedException(
+            'PHPUnit_Framework_ExpectationFailedException',
+            'actual content is "foofoofoobar"' // check actual content is display
+        );
+        $this->assertQueryContentRegex('div', '/foobar/');
+    }
+
     public function testAssertXpathQueryContentRegex()
     {
         $this->dispatch('/tests');
