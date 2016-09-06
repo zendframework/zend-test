@@ -36,7 +36,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#33](https://github.com/zendframework/zend-test/pull/33) fixes
+  `queryContentRegexAssertion()` (used by `assertQueryContentRegex()` and
+  `assertXpathQueryContentRegex()`) properly checks all matching nodes for
+  content matching the regular expression, instead of only the first. The
+  prevents false negative assertions from occuring.
 
 ## 3.0.1 - 2016-06-15
 
