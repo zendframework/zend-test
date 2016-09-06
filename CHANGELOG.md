@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.2 - TBD
+## 3.0.2 - 2016-09-06
 
 ### Added
 
@@ -25,6 +25,10 @@ All notable changes to this project will be documented in this file, in reverse 
   prevents false negative assertions from occuring.
 - [#21](https://github.com/zendframework/zend-test/pull/21) updates the
   `sebastian/version` dependency to also allow v2.0 releases.
+- [#31](https://github.com/zendframework/zend-test/pull/31) fixes an issue with
+  the `AbstractControllerTestCase` when used to test a console request.
+  Previously, routes with multiple literal flags were never matched; they now
+  are.
 
 ## 3.0.1 - 2016-06-15
 
