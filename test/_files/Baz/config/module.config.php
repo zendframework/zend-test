@@ -32,7 +32,17 @@ return array(
                             'action'     => 'console',
                         ),
                     ),
-                )
+                ),
+                'arguments-literal' => array(
+                    'type' => 'simple',
+                    'options' => array(
+                        'route'    => 'literal --foo [--bar] [--doo=] [--optional]',
+                        'defaults' => array(
+                            'controller' => 'baz_index',
+                            'action'     => 'console',
+                        ),
+                    ),
+                ),
             ),
         ),
     ),
