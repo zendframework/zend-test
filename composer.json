@@ -14,7 +14,7 @@
     },
     "require": {
         "php": "^5.6 || ^7.0",
-        "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0",
+        "phpunit/phpunit": "^5.7 || ^6.0",
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
@@ -24,8 +24,7 @@
         "zendframework/zend-stdlib": "^2.7 || ^3.0",
         "zendframework/zend-uri": "^2.5",
         "zendframework/zend-view": "^2.6.3",
-        "sebastian/version": "^1.0.4 || ^2.0",
-        "phpunit/phpunit": "^5.7 || ^6.0"
+        "sebastian/version": "^1.0.4 || ^2.0"
     },
     "require-dev": {
         "symfony/finder": "^2.2",
