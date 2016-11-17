@@ -288,12 +288,12 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function dispatch($url, $method = null, $params = [], $isXmlHttpRequest = false)
     {
-        if (!isset($method)
+        if (! isset($method)
             && $this->getRequest() instanceof HttpRequest
             && $requestMethod = $this->getRequest()->getMethod()
         ) {
             $method = $requestMethod;
-        } elseif (!isset($method)) {
+        } elseif (! isset($method)) {
             $method = HttpRequest::METHOD_GET;
         }
 
@@ -317,7 +317,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $this->application = null;
 
         // reset server data
-        if (!$keepPersistence) {
+        if (! $keepPersistence) {
             // Do not create a global session variable if it doesn't already
             // exist. Otherwise calling this function could mark tests risky,
             // as it changes global state.
@@ -413,7 +413,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     protected function getResponseStatusCode()
     {
         $response = $this->getResponse();
-        if (!$this->useConsoleRequest) {
+        if (! $this->useConsoleRequest) {
             return $response->getStatusCode();
         }
 
@@ -433,7 +433,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertResponseStatusCode($code)
     {
         if ($this->useConsoleRequest) {
-            if (!in_array($code, [0, 1])) {
+            if (! in_array($code, [0, 1])) {
                 throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
                     'Console status code assert value must be O (valid) or 1 (error)'
                 ));
@@ -456,7 +456,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotResponseStatusCode($code)
     {
         if ($this->useConsoleRequest) {
-            if (!in_array($code, [0, 1])) {
+            if (! in_array($code, [0, 1])) {
                 throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
                     'Console status code assert value must be O (valid) or 1 (error)'
                 ));
@@ -480,7 +480,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertApplicationException($type, $message = null)
     {
         $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
-        if (!$exception) {
+        if (! $exception) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting application exception, exception not exist'
             ));
@@ -501,7 +501,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     protected function getControllerFullClassName()
     {
         $routeMatch           = $this->getApplication()->getMvcEvent()->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage('No route matched'));
         }
         $controllerIdentifier = $routeMatch->getParam('controller');
@@ -557,7 +557,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertControllerClass($controller)
     {
         $controllerClass = $this->getControllerFullClassName();
-        $match           = substr($controllerClass, strrpos($controllerClass, '\\')+1);
+        $match           = substr($controllerClass, strrpos($controllerClass, '\\') + 1);
         $match           = strtolower($match);
         $controller      = strtolower($controller);
         if ($controller != $match) {
@@ -576,7 +576,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotControllerClass($controller)
     {
         $controllerClass = $this->getControllerFullClassName();
-        $match           = substr($controllerClass, strrpos($controllerClass, '\\')+1);
+        $match           = substr($controllerClass, strrpos($controllerClass, '\\') + 1);
         $match           = strtolower($match);
         $controller      = strtolower($controller);
         if ($controller == $match) {
@@ -595,7 +595,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertControllerName($controller)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage('No route matched'));
         }
         $match      = $routeMatch->getParam('controller');
@@ -617,7 +617,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotControllerName($controller)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage('No route matched'));
         }
         $match      = $routeMatch->getParam('controller');
@@ -639,7 +639,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertActionName($action)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage('No route matched'));
         }
         $match      = $routeMatch->getParam('action');
@@ -661,7 +661,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotActionName($action)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage('No route matched'));
         }
         $match      = $routeMatch->getParam('action');
@@ -683,7 +683,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertMatchedRouteName($route)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage('No route matched'));
         }
         $match      = $routeMatch->getMatchedRouteName();
@@ -705,7 +705,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     public function assertNotMatchedRouteName($route)
     {
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage('No route matched'));
         }
         $match      = $routeMatch->getMatchedRouteName();
