@@ -691,7 +691,11 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $route      = strtolower($route);
         if ($route != $match) {
             throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
-                sprintf('Failed asserting matched route name was "%s", actual matched route name is "%s"', $route, $match)
+                sprintf(
+                    'Failed asserting matched route name was "%s", actual matched route name is "%s"',
+                    $route,
+                    $match
+                )
             ));
         }
         $this->assertEquals($route, $match);
