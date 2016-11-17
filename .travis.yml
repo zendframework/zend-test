@@ -15,7 +15,6 @@ cache:
 
 env:
   global:
-    - PHPUNIT_VERSION=~4.0
     - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
     - SITE_URL: https://zendframework.github.io/zend-test
     - GH_USER_NAME: "Matthew Weier O'Phinney"
@@ -37,7 +36,6 @@ matrix:
         - PATH="$HOME/.local/bin:$PATH"
     - php: 5.6
       env:
-        - PHPUNIT_VERSION=~5.0
         - DEPS=latest
     - php: 7
       env:
@@ -68,7 +66,6 @@ before_install:
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
   - travis_retry composer self-update
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer require --dev --no-update satooshi/php-coveralls ; fi
-  - composer require --no-update "phpunit/phpunit:$PHPUNIT_VERSION"
 
 install:
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
