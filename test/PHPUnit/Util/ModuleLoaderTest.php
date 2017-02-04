@@ -45,6 +45,28 @@ class ModuleLoaderTest extends TestCase
         $this->tearDownCacheDir();
     }
 
+    public function expectException($exception)
+    {
+        if (! method_exists(TestCase::class, 'expectException')) {
+            parent::setExpectedException($exception);
+        } else {
+            parent::expectException($exception);
+        }
+    }
+
+    public function expectExceptionMessage($message)
+    {
+        if (! method_exists(TestCase::class, 'expectExceptionMessage')) {
+            if (!$this->expectedException) {
+                $this->expectedException = \Exception::class;
+            }
+
+            parent::setExpectedException($this->expectedException, $message);
+        } else {
+            parent::expectExceptionMessage($message);
+        }
+    }
+
     public function testCanLoadModule()
     {
         require_once __DIR__ . '/../../_files/Baz/Module.php';
@@ -58,7 +80,7 @@ class ModuleLoaderTest extends TestCase
     {
         $this->expectException('Zend\ModuleManager\Exception\RuntimeException');
         $this->expectExceptionMessage('could not be initialized');
-        
+
         $loader = new ModuleLoader(['FooBaz']);
     }
 
