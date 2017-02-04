@@ -75,6 +75,28 @@ abstract class AbstractControllerTestCase extends TestCase
         Console::overrideIsConsole($this->usedConsoleBackup);
     }
 
+    public function expectException($exception)
+    {
+        if (! method_exists(TestCase::class, 'expectException')) {
+            $this->setExpectedException($exception);
+        } else {
+            parent::expectException($exception);
+        }
+    }
+
+    public function expectExceptionMessage($message)
+    {
+        if (! method_exists(TestCase::class, 'expectExceptionMessage')) {
+            if (!$this->expectedException) {
+                $this->expectedException = \Exception::class;
+            }
+
+            $this->setExpectedException($this->expectedException, $message);
+        } else {
+            parent::expectExceptionMessage($message);
+        }
+    }
+
     /**
      * Create a failure message.
      *
