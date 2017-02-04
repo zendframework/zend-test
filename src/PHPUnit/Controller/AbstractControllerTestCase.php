@@ -63,14 +63,14 @@ abstract class AbstractControllerTestCase extends TestCase
      *
      * @var string
      */
-    protected $expectedException = null;
+    private $expectedException = null;
 
     /**
      * The message of the expected Exception.
      *
      * @var string
      */
-    protected $expectedExceptionMessage = '';
+    private $expectedExceptionMessage = '';
 
     /**
      * Reset the application for isolation

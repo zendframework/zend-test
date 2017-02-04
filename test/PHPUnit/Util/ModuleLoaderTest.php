@@ -17,6 +17,20 @@ if (! class_exists(TestCase::class)) {
 
 class ModuleLoaderTest extends TestCase
 {
+    /**
+     * The name of the expected Exception.
+     *
+     * @var string
+     */
+    private $expectedException = null;
+
+    /**
+     * The message of the expected Exception.
+     *
+     * @var string
+     */
+    private $expectedExceptionMessage = '';
+
     public function tearDownCacheDir()
     {
         $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
