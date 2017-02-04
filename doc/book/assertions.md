@@ -109,6 +109,24 @@ following assertions are available.
   contains the given header and that its content contains the given string.
 - `assertResponseHeaderRegex($header, $pattern)`: assert that the response
   contains the given header and that its content matches the given regex.
+- `assertHasResponseHeader($header)`: assert that the response header exists.
 
 Additionally, each of the above assertions have a 'Not' variant for negative assertions.
+
+- `assertResponseReasonPhrase($phrase)`: assert the the response has the given
+  reason phrase
+
+## Other Assertions
+
+### Application Exceptions
+
+- `assertApplicationException($type, $message = null)`: assert the given 
+  application exception type and message.
+
+### Template name
+
+- `assertTemplateName($templateName)`: assert that a template was used somewhere
+  in the view model tree.
+- `assertNotTemplateName($templateName)`: assert that a template was not used
+  somewhere in the view model tree.
 
