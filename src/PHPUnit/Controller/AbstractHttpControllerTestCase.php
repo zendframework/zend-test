@@ -8,8 +8,12 @@
  */
 namespace Zend\Test\PHPUnit\Controller;
 
-use PHPUnit_Framework_ExpectationFailedException;
+use PHPUnit\Framework\ExpectationFailedException;
 use Zend\Dom\Document;
+
+if (! class_exists(ExpectationFailedException::class)) {
+    class_alias(\PHPUnit_Framework_ExpectationFailedException::class, ExpectationFailedException::class);
+}
 
 abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
 {
@@ -58,7 +62,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader($header);
         if (false === $responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header "%s" found',
                 $header
             )));
@@ -75,7 +79,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader($header);
         if (false !== $responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header "%s" WAS NOT found',
                 $header
             )));
@@ -93,7 +97,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
@@ -113,7 +117,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         }
 
         if (!$headerMatched) {
-            throw new \PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new \ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header "%s" exists and contains "%s", actual content is "%s"',
                 $header,
                 $match,
@@ -134,7 +138,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
@@ -146,7 +150,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
 
         foreach ($responseHeader as $currentHeader) {
             if ($match == $currentHeader->getFieldValue()) {
-                throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+                throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                     'Failed asserting response header "%s" DOES NOT CONTAIN "%s"',
                     $header,
                     $match
@@ -167,7 +171,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
@@ -188,7 +192,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         }
 
         if (!$headerMatched) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header "%s" exists and matches regex "%s", actual content is "%s"',
                 $header,
                 $pattern,
@@ -209,7 +213,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
@@ -225,7 +229,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
             $headerMatched = (bool) preg_match($pattern, $currentHeader->getFieldValue());
 
             if ($headerMatched) {
-                throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+                throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                     'Failed asserting response header "%s" DOES NOT MATCH regex "%s"',
                     $header,
                     $pattern
@@ -243,7 +247,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader('Location');
         if (false === $responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
+            throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
         }
@@ -257,7 +261,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader('Location');
         if (false !== $responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response is NOT a redirect, actual redirection is "%s"',
                 $responseHeader->getFieldValue()
             )));
@@ -274,12 +278,12 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader('Location');
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
+            throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
         }
         if ($url != $responseHeader->getFieldValue()) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response redirects to "%s", actual redirection is "%s"',
                 $url,
                 $responseHeader->getFieldValue()
@@ -297,12 +301,12 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader('Location');
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
+            throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
         }
         if ($url == $responseHeader->getFieldValue()) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response redirects to "%s"',
                 $url
             )));
@@ -319,12 +323,12 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader('Location');
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
+            throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
         }
         if (!preg_match($pattern, $responseHeader->getFieldValue())) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response redirects to URL MATCHING "%s", actual redirection is "%s"',
                 $pattern,
                 $responseHeader->getFieldValue()
@@ -342,12 +346,12 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $responseHeader = $this->getResponseHeader('Location');
         if (!$responseHeader) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
+            throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
         }
         if (preg_match($pattern, $responseHeader->getFieldValue())) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response DOES NOT redirect to URL MATCHING "%s"',
                 $pattern
             )));
@@ -434,7 +438,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
         if (!$match > 0) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s EXISTS',
                 $path
             )));
@@ -473,7 +477,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match  = $this->$method($path);
         if ($match != 0) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s DOES NOT EXIST',
                 $path
             )));
@@ -513,7 +517,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
         if ($match != $count) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s OCCURS EXACTLY %d times, actually occurs %d times',
                 $path,
                 $count,
@@ -557,7 +561,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
         if ($match == $count) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s DOES NOT OCCUR EXACTLY %d times',
                 $path,
                 $count
@@ -600,7 +604,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
         if ($match < $count) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s OCCURS AT LEAST %d times, actually occurs %d times',
                 $path,
                 $count,
@@ -644,7 +648,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
         if ($match > $count) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s OCCURS AT MOST %d times, actually occurs %d times',
                 $path,
                 $count,
@@ -688,7 +692,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $result = $this->query($path, $useXpath);
 
         if ($result->count() == 0) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s EXISTS',
                 $path
             )));
@@ -705,7 +709,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
             $nodeValues[] = $node->nodeValue;
         }
 
-        throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+        throw new ExpectationFailedException($this->createFailureMessage(sprintf(
             'Failed asserting node denoted by %s CONTAINS content "%s", Contents: [%s]',
             $path,
             $match,
@@ -746,14 +750,14 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $result = $this->query($path, $useXpath);
         if ($result->count() == 0) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s EXISTS',
                 $path
             )));
         }
         foreach ($result as $node) {
             if ($node->nodeValue == $match) {
-                throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+                throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                     'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"',
                     $path,
                     $match
@@ -797,7 +801,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $result = $this->query($path, $useXpath);
         if ($result->count() == 0) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s EXISTS',
                 $path
             )));
@@ -815,7 +819,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         }
 
         if (! $found) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node denoted by %s CONTAINS content MATCHING "%s", actual content is "%s"',
                 $path,
                 $pattern,
@@ -859,13 +863,13 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $result = $this->query($path, $useXpath);
         if ($result->count() == 0) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s EXISTS',
                 $path
             )));
         }
         if (preg_match($pattern, $result->current()->nodeValue)) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content MATCHING "%s"',
                 $path,
                 $pattern
