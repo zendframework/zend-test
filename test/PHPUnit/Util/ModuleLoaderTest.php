@@ -8,10 +8,14 @@
  */
 namespace ZendTest\Test\PHPUnit\Util;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Test\Util\ModuleLoader;
 
-class ModuleLoaderTest extends PHPUnit_Framework_TestCase
+if (! class_exists(TestCase::class)) {
+    class_alias(\PHPUnit_Framework_TestCase::class, TestCase::class);
+}
+
+class ModuleLoaderTest extends TestCase
 {
     public function tearDownCacheDir()
     {

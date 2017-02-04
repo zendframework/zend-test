@@ -8,8 +8,13 @@
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use PHPUnit\Framework\ExpectationFailedException;
 use Zend\Router\RouteMatch;
 use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
+
+if (! class_exists(ExpectationFailedException::class)) {
+    class_alias(\PHPUnit_Framework_ExpectationFailedException::class, ExpectationFailedException::class);
+}
 
 /**
  * @group      Zend_Test
@@ -35,7 +40,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertResponseStatusCode(0);
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'actual status code is "0"' // check actual status code is display
         );
         $this->assertResponseStatusCode(1);
@@ -46,7 +51,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->dispatch('--console');
         $this->assertNotResponseStatusCode(1);
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(ExpectationFailedException::class);
         $this->assertNotResponseStatusCode(0);
     }
 
@@ -54,7 +59,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     {
         $this->dispatch('--console');
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'Console status code assert value must be O (valid) or 1 (error)'
         );
         $this->assertResponseStatusCode(2);
@@ -64,7 +69,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     {
         $this->dispatch('--console');
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'Console status code assert value must be O (valid) or 1 (error)'
         );
         $this->assertNotResponseStatusCode(2);
@@ -77,7 +82,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertConsoleOutputContains('foo, bar');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'actual content is "foo, bar"' // check actual content is display
         );
         $this->assertConsoleOutputContains('baz');
@@ -88,7 +93,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->dispatch('--console');
         $this->assertNotConsoleOutputContains('baz');
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(ExpectationFailedException::class);
         $this->assertNotConsoleOutputContains('foo');
     }
 

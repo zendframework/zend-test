@@ -10,7 +10,7 @@ namespace ZendTest\Test\PHPUnit\Controller;
 
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use PHPUnit_Framework_ExpectationFailedException;
+use PHPUnit\Framework\ExpectationFailedException;
 use RuntimeException;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
@@ -18,6 +18,10 @@ use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+
+if (! class_exists(ExpectationFailedException::class)) {
+    class_alias(\PHPUnit_Framework_ExpectationFailedException::class, ExpectationFailedException::class);
+}
 
 /**
  * @group      Zend_Test
@@ -140,7 +144,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('BAz');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'actual module name is "baz"' // check actual module is display
         );
         $this->assertModuleName('Application');
@@ -158,7 +162,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $caught = false;
         try {
             $this->assertModuleName('Application');
-        } catch (PHPUnit_Framework_ExpectationFailedException $ex) {
+        } catch (ExpectationFailedException $ex) {
             $caught = true;
             $message = $ex->getMessage();
         }
@@ -182,7 +186,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $caught = false;
         try {
             $this->assertModuleName('Application');
-        } catch (PHPUnit_Framework_ExpectationFailedException $ex) {
+        } catch (ExpectationFailedException $ex) {
             $caught = true;
             $message = $ex->getMessage();
         }
@@ -199,7 +203,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotModuleName('Application');
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(ExpectationFailedException::class);
         $this->assertNotModuleName('baz');
     }
 
@@ -213,7 +217,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('indexcontroller');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'actual controller class is "indexcontroller"' // check actual controller class is display
         );
         $this->assertControllerClass('Index');
@@ -224,7 +228,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotControllerClass('Index');
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(ExpectationFailedException::class);
         $this->assertNotControllerClass('IndexController');
     }
 
@@ -238,7 +242,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('BAz_index');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'actual controller name is "baz_index"' // check actual controller name is display
         );
         $this->assertControllerName('baz');
@@ -249,7 +253,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotControllerName('baz');
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(ExpectationFailedException::class);
         $this->assertNotControllerName('baz_index');
     }
 
@@ -263,7 +267,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertActionName('UnitTests');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'actual action name is "unittests"' // check actual action name is display
         );
         $this->assertActionName('unit');
@@ -274,7 +278,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotActionName('unit');
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(ExpectationFailedException::class);
         $this->assertNotActionName('unittests');
     }
 
@@ -288,7 +292,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('MyRoute');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
+            ExpectationFailedException::class,
             'actual matched route name is "myroute"' // check actual matched route name is display
         );
         $this->assertMatchedRouteName('route');
@@ -299,7 +303,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotMatchedRouteName('route');
 
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException(ExpectationFailedException::class);
         $this->assertNotMatchedRouteName('myroute');
     }
 
@@ -312,56 +316,56 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function testAssertNoMatchedRouteWithMatchedRoute()
     {
         $this->dispatch('/tests');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'no route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'no route matched');
         $this->assertNoMatchedRoute();
     }
 
     public function testControllerNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'No route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'No route matched');
         $this->assertControllerName('something');
     }
 
     public function testNotControllerNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'No route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'No route matched');
         $this->assertNotControllerName('something');
     }
 
     public function testActionNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'No route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'No route matched');
         $this->assertActionName('something');
     }
 
     public function testNotActionNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'No route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'No route matched');
         $this->assertNotActionName('something');
     }
 
     public function testMatchedRouteNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'No route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'No route matched');
         $this->assertMatchedRouteName('something');
     }
 
     public function testNotMatchedRouteNameWithNoRouteMatch()
     {
         $this->dispatch('/invalid');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'No route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'No route matched');
         $this->assertNotMatchedRouteName('something');
     }
 
     public function testControllerClassWithNoRoutematch()
     {
         $this->dispatch('/invalid');
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException', 'No route matched');
+        $this->setExpectedException(ExpectationFailedException::class, 'No route matched');
         $this->assertControllerClass('something');
     }
 
