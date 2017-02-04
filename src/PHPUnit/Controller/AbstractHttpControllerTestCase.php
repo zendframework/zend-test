@@ -117,7 +117,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         }
 
         if (!$headerMatched) {
-            throw new \ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header "%s" exists and contains "%s", actual content is "%s"',
                 $header,
                 $match,

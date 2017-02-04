@@ -56,7 +56,9 @@ class ModuleLoaderTest extends TestCase
 
     public function testCanNotLoadModule()
     {
-        $this->setExpectedException('Zend\ModuleManager\Exception\RuntimeException', 'could not be initialized');
+        $this->expectException('Zend\ModuleManager\Exception\RuntimeException');
+        $this->expectExceptionMessage('could not be initialized');
+        
         $loader = new ModuleLoader(['FooBaz']);
     }
 

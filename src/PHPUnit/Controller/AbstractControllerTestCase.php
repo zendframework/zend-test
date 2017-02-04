@@ -497,7 +497,10 @@ abstract class AbstractControllerTestCase extends TestCase
             // set exception as null because we know and have assert the exception
             $this->getApplication()->getMvcEvent()->setParam('exception', null);
         }
-        $this->setExpectedException($type, $message);
+        $this->expectException($type);
+        if ($message !== null) {
+            $this->expectExceptionMessage($message);
+        }
         throw $exception;
     }
 

@@ -31,7 +31,7 @@ class ModuleDependenciesTest extends AbstractHttpControllerTestCase
         $this->assertEquals(true, $sm->has('BarObject'));
 
         $this->assertModulesLoaded(['Foo', 'Bar']);
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectException(ExpectationFailedException::class);
         $this->assertModulesLoaded(['Foo', 'Bar', 'Unknow']);
     }
 
@@ -45,7 +45,7 @@ class ModuleDependenciesTest extends AbstractHttpControllerTestCase
         $this->assertEquals(true, $sm->has('BarObject'));
 
         $this->assertNotModulesLoaded(['Foo']);
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectException(ExpectationFailedException::class);
         $this->assertNotModulesLoaded(['Foo', 'Bar']);
     }
 }
