@@ -7,6 +7,10 @@
         "test"
     ],
     "homepage": "https://github.com/zendframework/zend-test",
+    "support": {
+      "issues": "https://github.com/zendframework/zend-test/issues",
+      "docs": "https://docs.zendframework.com/zend-test/"
+    },
     "autoload": {
         "psr-4": {
             "Zend\\Test\\": "src/"
