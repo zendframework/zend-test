@@ -68,16 +68,25 @@ and max counts do not have these variants, for what should be obvious reasons.)
 Some developers are more familiar with XPath than with CSS selectors, and thus
 XPath variants of all the Query assertions are also provided. These are:
 
-- `assertXpathQuery($path)`
-- `assertNotXpathQuery($path)`
-- `assertXpathQueryCount($path, $count)`
-- `assertNotXpathQueryCount($path, $count)`
-- `assertXpathQueryCountMin($path, $count)`
-- `assertXpathQueryCountMax($path, $count)`
-- `assertXpathQueryContentContains($path, $match)`
-- `assertNotXpathQueryContentContains($path, $match)`
-- `assertXpathQueryContentRegex($path, $pattern)`
-- `assertNotXpathQueryContentRegex($path, $pattern)`
+- `assertXpathQuery($path)`: assert against the given XPath selection
+- `assertNotXpathQuery($path)`: assert against the given XPath selection;
+  negative assertions
+- `assertXpathQueryCount($path, $count)`: assert against XPath selection; should
+  contain exact number of nodes
+- `assertNotXpathQueryCount($path, $count)`: assert against DOM/XPath selection;
+  should not contain exact number of nodes
+- `assertXpathQueryCountMin($path, $count)`: assert against XPath selection;
+  should contain at least this number of nodes
+- `assertXpathQueryCountMax($path, $count)`: assert against XPath selection;
+  should contain no more than this number of nodes
+- `assertXpathQueryContentContains($path, $match)`: assert against XPath
+  selection; node should contain content
+- `assertNotXpathQueryContentContains($path, $match)`: assert against XPath
+ selection; node should not contain content
+- `assertXpathQueryContentRegex($path, $pattern)`: assert against XPath
+  selection; node should match content
+- `assertNotXpathQueryContentRegex($path, $pattern)`: assert against XPath
+  selection; node should not match content
 
 ## Redirect Assertions
 
