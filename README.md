@@ -10,4 +10,4 @@ library supported currently.
 
 
 - File issues at https://github.com/zendframework/zend-test/issues
-- Documentation is at http://framework.zend.com/manual/current/en/index.html#zend-test
+- Documentation is at https://docs.zendframework.com/zend-test
