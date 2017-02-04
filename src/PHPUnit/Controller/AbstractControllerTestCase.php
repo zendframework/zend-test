@@ -59,6 +59,20 @@ abstract class AbstractControllerTestCase extends TestCase
     protected $traceError = true;
 
     /**
+     * The name of the expected Exception.
+     *
+     * @var string
+     */
+    protected $expectedException = null;
+
+    /**
+     * The message of the expected Exception.
+     *
+     * @var string
+     */
+    protected $expectedExceptionMessage = '';
+
+    /**
      * Reset the application for isolation
      */
     protected function setUp()
