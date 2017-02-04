@@ -78,7 +78,7 @@ abstract class AbstractControllerTestCase extends TestCase
     public function expectException($exception)
     {
         if (! method_exists(TestCase::class, 'expectException')) {
-            $this->setExpectedException($exception);
+            parent::setExpectedException($exception);
         } else {
             parent::expectException($exception);
         }
@@ -91,7 +91,7 @@ abstract class AbstractControllerTestCase extends TestCase
                 $this->expectedException = \Exception::class;
             }
 
-            $this->setExpectedException($this->expectedException, $message);
+            parent::setExpectedException($this->expectedException, $message);
         } else {
             parent::expectExceptionMessage($message);
         }
