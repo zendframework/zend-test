@@ -17,49 +17,6 @@ if (! class_exists(TestCase::class)) {
 
 class ModuleLoaderTest extends TestCase
 {
-    /**
-     * The name of the expected Exception.
-     *
-     * @var string
-     */
-    private $expectedException = null;
-
-    /**
-     * The message of the expected Exception.
-     *
-     * @var string
-     */
-    private $expectedExceptionMessage = '';
-
-    /**
-     * @param string $exception
-     */
-    public function expectException($exception)
-    {
-        if (method_exists(TestCase::class, 'expectException')) {
-            parent::expectException($exception);
-        } else {
-            parent::setExpectedException($exception);
-        }
-    }
-
-    /**
-     * @param string $message
-     *
-     * @throws Exception
-     */
-    public function expectExceptionMessage($message)
-    {
-        if (method_exists(TestCase::class, 'expectExceptionMessage')) {
-            parent::expectExceptionMessage($message);
-        } else {
-            if (!$this->expectedException) {
-                $this->expectedException = \Exception::class;
-            }
-            parent::setExpectedException($this->expectedException, $message);
-        }
-    }
-
     public function tearDownCacheDir()
     {
         $cacheDir = sys_get_temp_dir() . '/zf2-module-test';

@@ -60,49 +60,6 @@ abstract class AbstractControllerTestCase extends TestCase
     protected $traceError = true;
 
     /**
-     * The name of the expected Exception.
-     *
-     * @var string
-     */
-    private $expectedException = null;
-
-    /**
-     * The message of the expected Exception.
-     *
-     * @var string
-     */
-    private $expectedExceptionMessage = '';
-
-    /**
-     * @param string $exception
-     */
-    public function expectException($exception)
-    {
-        if (method_exists(TestCase::class, 'expectException')) {
-            parent::expectException($exception);
-        } else {
-            parent::setExpectedException($exception);
-        }
-    }
-
-    /**
-     * @param string $message
-     *
-     * @throws Exception
-     */
-    public function expectExceptionMessage($message)
-    {
-        if (method_exists(TestCase::class, 'expectExceptionMessage')) {
-            parent::expectExceptionMessage($message);
-        } else {
-            if (!$this->expectedException) {
-                $this->expectedException = \Exception::class;
-            }
-            parent::setExpectedException($this->expectedException, $message);
-        }
-    }
-
-    /**
      * Reset the application for isolation
      */
     protected function setUp()
