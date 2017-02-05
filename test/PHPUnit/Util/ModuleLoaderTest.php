@@ -31,6 +31,35 @@ class ModuleLoaderTest extends TestCase
      */
     private $expectedExceptionMessage = '';
 
+    /**
+     * @param string $exception
+     */
+    public function expectException($exception)
+    {
+        if (method_exists(TestCase::class, 'expectException')) {
+            parent::expectException($exception);
+        } else {
+            parent::setExpectedException($exception);
+        }
+    }
+
+    /**
+     * @param string $message
+     *
+     * @throws Exception
+     */
+    public function expectExceptionMessage($message)
+    {
+        if (method_exists(TestCase::class, 'expectExceptionMessage')) {
+            parent::expectExceptionMessage($message);
+        } else {
+            if (!$this->expectedException) {
+                $this->expectedException = \Exception::class;
+            }
+            parent::setExpectedException($this->expectedException, $message);
+        }
+    }
+
     public function tearDownCacheDir()
     {
         $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
@@ -57,28 +86,6 @@ class ModuleLoaderTest extends TestCase
     public function tearDown()
     {
         $this->tearDownCacheDir();
-    }
-
-    public function expectException($exception)
-    {
-        if (! method_exists(TestCase::class, 'expectException')) {
-            parent::setExpectedException($exception);
-        } else {
-            parent::expectException($exception);
-        }
-    }
-
-    public function expectExceptionMessage($message)
-    {
-        if (! method_exists(TestCase::class, 'expectExceptionMessage')) {
-            if (!$this->expectedException) {
-                $this->expectedException = \Exception::class;
-            }
-
-            parent::setExpectedException($this->expectedException, $message);
-        } else {
-            parent::expectExceptionMessage($message);
-        }
     }
 
     public function testCanLoadModule()

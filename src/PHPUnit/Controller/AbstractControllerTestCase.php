@@ -10,6 +10,7 @@ namespace Zend\Test\PHPUnit\Controller;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Util\InvalidArgumentHelper;
 use Zend\Console\Console;
 use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request as HttpRequest;
@@ -73,6 +74,35 @@ abstract class AbstractControllerTestCase extends TestCase
     private $expectedExceptionMessage = '';
 
     /**
+     * @param string $exception
+     */
+    public function expectException($exception)
+    {
+        if (method_exists(TestCase::class, 'expectException')) {
+            parent::expectException($exception);
+        } else {
+            parent::setExpectedException($exception);
+        }
+    }
+
+    /**
+     * @param string $message
+     *
+     * @throws Exception
+     */
+    public function expectExceptionMessage($message)
+    {
+        if (method_exists(TestCase::class, 'expectExceptionMessage')) {
+            parent::expectExceptionMessage($message);
+        } else {
+            if (!$this->expectedException) {
+                $this->expectedException = \Exception::class;
+            }
+            parent::setExpectedException($this->expectedException, $message);
+        }
+    }
+
+    /**
      * Reset the application for isolation
      */
     protected function setUp()
@@ -87,28 +117,6 @@ abstract class AbstractControllerTestCase extends TestCase
     protected function tearDown()
     {
         Console::overrideIsConsole($this->usedConsoleBackup);
-    }
-
-    public function expectException($exception)
-    {
-        if (! method_exists(TestCase::class, 'expectException')) {
-            parent::setExpectedException($exception);
-        } else {
-            parent::expectException($exception);
-        }
-    }
-
-    public function expectExceptionMessage($message)
-    {
-        if (! method_exists(TestCase::class, 'expectExceptionMessage')) {
-            if (!$this->expectedException) {
-                $this->expectedException = \Exception::class;
-            }
-
-            parent::setExpectedException($this->expectedException, $message);
-        } else {
-            parent::expectExceptionMessage($message);
-        }
     }
 
     /**
