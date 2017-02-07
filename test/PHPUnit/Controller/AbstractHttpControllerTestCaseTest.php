@@ -317,7 +317,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCountMax('div.top', 3);
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actually occurs 3 times');  // check actual occurs is display
+        $this->expectExceptionMessage('actually occurs 3 times'); // check actual occurs is display
         $this->assertQueryCountMax('div.top', 2);
     }
 
