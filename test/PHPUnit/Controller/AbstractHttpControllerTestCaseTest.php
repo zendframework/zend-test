@@ -9,6 +9,7 @@
 namespace ZendTest\Test\PHPUnit\Controller;
 
 use PHPUnit\Framework\ExpectationFailedException;
+use RuntimeException;
 use Zend\EventManager\StaticEventManager;
 use Zend\Mvc\MvcEvent;
 use Zend\Router\Http\RouteMatch;
@@ -657,7 +658,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             parent::tearDown();
         } catch (\Exception $e) {
             $this->getApplication()->getMvcEvent()->setParam('exception', null);
-            $this->expectException('RuntimeException');
+            $this->expectException(RuntimeException::class);
             $this->expectExceptionMessage('Foo error');
             throw $e;
         }

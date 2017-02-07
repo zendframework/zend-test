@@ -9,6 +9,7 @@
 namespace ZendTest\Test\PHPUnit\Util;
 
 use PHPUnit\Framework\TestCase;
+use Zend\ModuleManager\Exception\RuntimeException;
 use Zend\Test\Util\ModuleLoader;
 
 class ModuleLoaderTest extends TestCase
@@ -52,7 +53,7 @@ class ModuleLoaderTest extends TestCase
 
     public function testCanNotLoadModule()
     {
-        $this->expectException('Zend\ModuleManager\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('could not be initialized');
 
         $loader = new ModuleLoader(['FooBaz']);
