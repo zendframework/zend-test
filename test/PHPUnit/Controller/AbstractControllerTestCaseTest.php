@@ -15,6 +15,7 @@ use RuntimeException;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
+use Zend\Stdlib\Exception\LogicException;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
@@ -80,7 +81,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         // cosntruct app
         $this->getApplication();
 
-        $this->expectException('Zend\Stdlib\Exception\LogicException');
+        $this->expectException(LogicException::class);
         $this->setApplicationConfig(
             include __DIR__ . '/../../_files/application.config.php'
         );
