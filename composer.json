@@ -14,7 +14,7 @@
     },
     "require": {
         "php": "^5.6 || ^7.0",
-        "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0",
+        "phpunit/phpunit": "^5.7 || ^6.0",
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
@@ -52,5 +52,16 @@
         "psr-4": {
             "ZendTest\\Test\\": "test/"
         }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
     }
 }
