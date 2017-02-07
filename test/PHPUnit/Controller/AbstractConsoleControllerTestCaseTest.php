@@ -40,7 +40,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertResponseStatusCode(0);
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actual status code is "0"' /* check actual status code is display */ );
+        $this->expectExceptionMessage('actual status code is "0"'); // check actual status code is display
         $this->assertResponseStatusCode(1);
     }
 
@@ -78,7 +78,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertConsoleOutputContains('foo, bar');
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actual content is "foo, bar"'  /* check actual content is display */);
+        $this->expectExceptionMessage('actual content is "foo, bar"'); // check actual content is display
         $this->assertConsoleOutputContains('baz');
     }
 

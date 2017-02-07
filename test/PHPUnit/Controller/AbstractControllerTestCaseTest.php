@@ -145,7 +145,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('BAz');
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actual module name is "baz"' /* check actual module is display */);
+        $this->expectExceptionMessage('actual module name is "baz"'); // check actual module is display
         $this->assertModuleName('Application');
     }
 
@@ -216,7 +216,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('indexcontroller');
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actual controller class is "indexcontroller"' /* check actual controller class is display */);
+        $this->expectExceptionMessage('actual controller class is "indexcontroller"'); // check actual controller class is display
         $this->assertControllerClass('Index');
     }
 
@@ -239,7 +239,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('BAz_index');
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actual controller name is "baz_index"' /* check actual controller name is display */);
+        $this->expectExceptionMessage('actual controller name is "baz_index"'); // check actual controller name is display
         $this->assertControllerName('baz');
     }
 
@@ -262,7 +262,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertActionName('UnitTests');
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actual action name is "unittests"' /* check actual action name is display */);
+        $this->expectExceptionMessage('actual action name is "unittests"'); // check actual action name is display
         $this->assertActionName('unit');
     }
 
@@ -285,7 +285,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('MyRoute');
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('actual matched route name is "myroute"' /* check actual matched route name is display */);
+        $this->expectExceptionMessage('actual matched route name is "myroute"');  // check actual matched route name is display
         $this->assertMatchedRouteName('route');
     }
 
