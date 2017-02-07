@@ -39,12 +39,8 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->dispatch('--console');
         $this->assertResponseStatusCode(0);
 
-        $this->expectException(
-            ExpectationFailedException::class
-        );
-        $this->expectExceptionMessage(
-            'actual status code is "0"' // check actual status code is display
-        );
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('actual status code is "0"' /* check actual status code is display */ );
         $this->assertResponseStatusCode(1);
     }
 
@@ -60,9 +56,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     public function testAssertResponseStatusCodeWithBadCode()
     {
         $this->dispatch('--console');
-        $this->expectException(
-            ExpectationFailedException::class
-        );
+        $this->expectException(ExpectationFailedException::class);
         $this->expectExceptionMessage('Console status code assert value must be O (valid) or 1 (error)');
 
         $this->assertResponseStatusCode(2);
@@ -71,9 +65,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     public function testAssertNotResponseStatusCodeWithBadCode()
     {
         $this->dispatch('--console');
-        $this->expectException(
-            ExpectationFailedException::class
-        );
+        $this->expectException(ExpectationFailedException::class);
         $this->expectExceptionMessage('Console status code assert value must be O (valid) or 1 (error)');
 
         $this->assertNotResponseStatusCode(2);
@@ -85,12 +77,8 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertConsoleOutputContains('foo');
         $this->assertConsoleOutputContains('foo, bar');
 
-        $this->expectException(
-            ExpectationFailedException::class
-        );
-        $this->expectExceptionMessage(
-            'actual content is "foo, bar"'  // check actual content is display
-        );
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('actual content is "foo, bar"'  /* check actual content is display */);
         $this->assertConsoleOutputContains('baz');
     }
 
