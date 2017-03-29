@@ -48,21 +48,17 @@ matrix:
     - php: 7
       env:
         - DEPS=latest
-    - php: hhvm 
+    - php: hhvm
       env:
         - DEPS=lowest
-    - php: hhvm 
+    - php: hhvm
       env:
         - DEPS=locked
-    - php: hhvm 
+    - php: hhvm
       env:
         - DEPS=latest
   allow_failures:
     - php: hhvm
-
-notifications:
-  irc: "irc.freenode.org#zftalk.dev"
-  email: false
 
 before_install:
   - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
@@ -87,3 +83,16 @@ after_success:
 
 after_script:
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then ./vendor/bin/coveralls ; fi
+
+notifications:
+  email: false
+  irc:
+    channels:
+      - "irc.freenode.org#zftalk.dev"
+    on_success: change
+    on_failure: always
+  slack:
+    rooms:
+      - secure: "QbJcG0o3KQbqwXQ9BR1IVd2+nsasZNNo6oWgOm960fYf24ErS5oUQJa7rrzZHADdAbUq/wnnJu4+hMKgeDR0hBznvM6zZfEnOWOWUzhhjaSzCqsUZWv7XxV7ndWtvpXP3k9ur44t4l4Yu7WuKiJh3SdVUxJYOP3pgY8OE1ugfbkkvOP/MAidbynS3OUUHnQfwQhpXnhirAzuPRGbEmhng8w4HXqEv0gbqlcWYtAaRDxCRmDuQfb4tucimKMXa7r41eRmBSBh8XUWzOvqp+Athwmb4Ihv0pJZJfzrvoRVOwf2tG7QnFpDW6GmYk2/FApubQOTZxDYbdnEtILaEmTA/hEDpoSNfcaIH533YXOqS8LSUE8z1VFHz6dZyIrQRjfaHIxmxCPQDpVVevvZL/Bm9yLbCou4g7eRPIQAJPbyyH+pnnj1EsOO6TgBMn6IiY33TuF8VjqmB9p9BlCaag3D56lsFSQq6XgsC47er6Jw93h6UPDJhWMAdMa41HPTx9ofIiM05Jw9NuR0SokLEIw8tbRLNvbpDWxVijI5Uzeb6QWJHgtrO9dZcWkoDOGXsW2eSoWhRKdtzdqcbdCEXxwpX535g9g571Wd4nd1mXU4Hn0d7UPOz1mUZnh4SnaCCWwwtIiTIpYArEQOLcy5g/DEOtzDhKzJvs/8bvRbQiSC21M="
+    on_success: change
+    on_failure: always
