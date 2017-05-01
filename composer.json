@@ -10,6 +10,11 @@
     "config": {
         "sort-packages": true
     },
+    "support": {
+        "docs": "https://docs.zendframework.com/zend-test/",
+        "forum": "https://discourse.zendframework.com/c/questions/components",
+        "issues": "https://github.com/zendframework/zend-test/issues"
+    },
     "autoload": {
         "psr-4": {
             "Zend\\Test\\": "src/"
