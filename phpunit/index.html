@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="..">zend-test</a>
             </span>
         </div>
@@ -122,7 +123,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -150,7 +151,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="..">zend-test</a> &raquo;</li>
   
     
   
@@ -164,7 +165,7 @@ Probably the easiest way to understand what it can do is to see an example.</p>
 <p>The following is a simple test case for an <code>IndexController</code> to verify things
 such as the final HTTP status code, and the discovered controller and action
 names:</p>
-<pre class="codehilite"><code class="language-php">namespace ApplicationTest\Controller;
+<pre class="codehilite"><code class="language-php linenums">namespace ApplicationTest\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
@@ -190,7 +191,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     }
 }</code></pre>
 
-
 <p>The setup of the test case should define the application config. You can use
 several configuration files to test module dependencies or your current
 application config.</p>
@@ -202,7 +202,7 @@ you'd expect from PHPUnit, as well as some scaffolding and assertions specific
 to zend-mvc.</p>
 <p>In order to test your MVC application, you will need to setup the application
 configuration. Use the <code>setApplicationConfig()</code> method to do this:</p>
-<pre class="codehilite"><code class="language-php">public function setUp()
+<pre class="codehilite"><code class="language-php linenums">public function setUp()
 {
     $this-&gt;setApplicationConfig(
         include '/path/to/application/config/test/application.config.php'
@@ -210,11 +210,10 @@ configuration. Use the <code>setApplicationConfig()</code> method to do this:</p
     parent::setUp();
 }</code></pre>
 
-
 <p>Once the application is set up, you can write your tests. To help debug tests,
 you can activate the flag <code>traceError</code> to throw MVC exceptions during test
 execution:</p>
-<pre class="codehilite"><code class="language-php">namespace ApplicationTest\Controller;
+<pre class="codehilite"><code class="language-php linenums">namespace ApplicationTest\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
@@ -223,23 +222,21 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     protected $traceError = true;
 }</code></pre>
 
-
 <h2 id="testing-your-controllers-and-mvc-applications">Testing your Controllers and MVC Applications</h2>
 <p>Once you have your application config in place, you can begin testing. Testing
 is basically as you would expect in an PHPUnit test suite, with a few minor
 differences.</p>
 <p>First, you will need to dispatch a URL to test, using the <code>dispatch</code> method of
 the TestCase:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<pre class="codehilite"><code class="language-php linenums">public function testIndexAction()
 {
     $this-&gt;dispatch('/');
 }</code></pre>
 
-
 <p>There will be times, however, that you need to provide extra information: query
 string arguments, POST, variables, cookies, etc.  You can populate the request
 with that information:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<pre class="codehilite"><code class="language-php linenums">public function testIndexAction()
 {
     $this-&gt;getRequest()
         -&gt;setMethod('POST')
@@ -247,21 +244,18 @@ with that information:</p>
     $this-&gt;dispatch('/');
 }</code></pre>
 
-
 <p>You can populate query string arguments or POST variables directly with the
 <code>dispatch</code> method:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<pre class="codehilite"><code class="language-php linenums">public function testIndexAction()
 {
     $this-&gt;dispatch('/', 'POST', ['argument' =&gt; 'value']);
 }</code></pre>
 
-
 <p>Query string arguments can be provided in the URL you dispatch:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<pre class="codehilite"><code class="language-php linenums">public function testIndexAction()
 {
     $this-&gt;dispatch('/tests?foo=bar&amp;baz=foo');
 }</code></pre>
-
 
 <p>Now that the request is made, it's time to start <a href="../assertions/">making assertions</a> against it.</p>
 
@@ -283,13 +277,49 @@ with that information:</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -329,7 +359,7 @@ with that information:</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -434,7 +464,7 @@ with that information:</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {

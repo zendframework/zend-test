@@ -16,6 +16,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -56,7 +57,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
               <a href="..">zend-test</a>
             </span>
         </div>
@@ -122,7 +123,7 @@
 </div>
 
     <!-- content:begin -->
-    <div class="container">
+    <div id="page-top" class="container docs">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -138,6 +139,8 @@
             <li><a href="#redirect-assertions">Redirect Assertions</a></li>
         
             <li><a href="#response-header-assertions">Response Header Assertions</a></li>
+        
+            <li><a href="#other-assertions">Other Assertions</a></li>
         
     
     </ul>
@@ -156,7 +159,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="..">zend-test</a> &raquo;</li>
   
     
   
@@ -224,16 +227,25 @@ and max counts do not have these variants, for what should be obvious reasons.)<
 <p>Some developers are more familiar with XPath than with CSS selectors, and thus
 XPath variants of all the Query assertions are also provided. These are:</p>
 <ul>
-<li><code>assertXpathQuery($path)</code></li>
-<li><code>assertNotXpathQuery($path)</code></li>
-<li><code>assertXpathQueryCount($path, $count)</code></li>
-<li><code>assertNotXpathQueryCount($path, $count)</code></li>
-<li><code>assertXpathQueryCountMin($path, $count)</code></li>
-<li><code>assertXpathQueryCountMax($path, $count)</code></li>
-<li><code>assertXpathQueryContentContains($path, $match)</code></li>
-<li><code>assertNotXpathQueryContentContains($path, $match)</code></li>
-<li><code>assertXpathQueryContentRegex($path, $pattern)</code></li>
-<li><code>assertNotXpathQueryContentRegex($path, $pattern)</code></li>
+<li><code>assertXpathQuery($path)</code>: assert against the given XPath selection</li>
+<li><code>assertNotXpathQuery($path)</code>: assert against the given XPath selection;
+  negative assertions</li>
+<li><code>assertXpathQueryCount($path, $count)</code>: assert against XPath selection; should
+  contain exact number of nodes</li>
+<li><code>assertNotXpathQueryCount($path, $count)</code>: assert against DOM/XPath selection;
+  should not contain exact number of nodes</li>
+<li><code>assertXpathQueryCountMin($path, $count)</code>: assert against XPath selection;
+  should contain at least this number of nodes</li>
+<li><code>assertXpathQueryCountMax($path, $count)</code>: assert against XPath selection;
+  should contain no more than this number of nodes</li>
+<li><code>assertXpathQueryContentContains($path, $match)</code>: assert against XPath
+  selection; node should contain content</li>
+<li><code>assertNotXpathQueryContentContains($path, $match)</code>: assert against XPath
+ selection; node should not contain content</li>
+<li><code>assertXpathQueryContentRegex($path, $pattern)</code>: assert against XPath
+  selection; node should match content</li>
+<li><code>assertNotXpathQueryContentRegex($path, $pattern)</code>: assert against XPath
+  selection; node should not match content</li>
 </ul>
 <h2 id="redirect-assertions">Redirect Assertions</h2>
 <p>Often an action will redirect. Instead of following the redirect,
@@ -262,8 +274,26 @@ following assertions are available.</p>
   contains the given header and that its content contains the given string.</li>
 <li><code>assertResponseHeaderRegex($header, $pattern)</code>: assert that the response
   contains the given header and that its content matches the given regex.</li>
+<li><code>assertHasResponseHeader($header)</code>: assert that the response header exists.</li>
 </ul>
 <p>Additionally, each of the above assertions have a 'Not' variant for negative assertions.</p>
+<ul>
+<li><code>assertResponseReasonPhrase($phrase)</code>: assert the the response has the given
+  reason phrase</li>
+</ul>
+<h2 id="other-assertions">Other Assertions</h2>
+<h3 id="application-exceptions">Application Exceptions</h3>
+<ul>
+<li><code>assertApplicationException($type, $message = null)</code>: assert the given 
+  application exception type and message.</li>
+</ul>
+<h3 id="template-name">Template name</h3>
+<ul>
+<li><code>assertTemplateName($templateName)</code>: assert that a template was used somewhere
+  in the view model tree.</li>
+<li><code>assertNotTemplateName($templateName)</code>: assert that a template was not used
+  somewhere in the view model tree.</li>
+</ul>
 
 <hr />
 
@@ -283,13 +313,49 @@ following assertions are available.</p>
     </div>
     <!-- content:end -->
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
-        </p>
-        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
-    </footer>
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -329,7 +395,7 @@ following assertions are available.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -434,7 +500,7 @@ following assertions are available.</p>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {
