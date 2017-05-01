@@ -7,6 +7,9 @@
         "test"
     ],
     "homepage": "https://github.com/zendframework/zend-test",
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "Zend\\Test\\": "src/"
@@ -15,6 +18,7 @@
     "require": {
         "php": "^5.6 || ^7.0",
         "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0",
+        "sebastian/version": "^1.0.4 || ^2.0",
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
@@ -23,20 +27,19 @@
         "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
         "zendframework/zend-stdlib": "^2.7 || ^3.0",
         "zendframework/zend-uri": "^2.5",
-        "zendframework/zend-view": "^2.6.3",
-        "sebastian/version": "^1.0.4 || ^2.0"
+        "zendframework/zend-view": "^2.6.3"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "1.7.*",
-        "symfony/finder": "^2.2",
         "mikey179/vfsStream": "~1.2",
+        "symfony/finder": "^2.2",
+        "zendframework/zend-coding-standard": "~1.0.0",
         "zendframework/zend-i18n": "^2.6",
         "zendframework/zend-log": "^2.7.1",
         "zendframework/zend-modulemanager": "^2.7.1",
+        "zendframework/zend-mvc-console": "^1.1.8",
+        "zendframework/zend-mvc-plugin-flashmessenger": "^0.1.0",
         "zendframework/zend-serializer": "^2.6.1",
         "zendframework/zend-session": "^2.6.2",
-        "zendframework/zend-mvc-plugin-flashmessenger": "^0.1.0",
-        "zendframework/zend-mvc-console": "^1.1.8",
         "zendframework/zend-validator": "^2.8"
     },
     "suggest": {
@@ -55,5 +58,16 @@
         "files": [
             "autoload/phpunit-class-aliases.php"
         ]
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
     }
 }
