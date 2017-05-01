@@ -25,7 +25,7 @@ class ModuleLoader
      */
     public function __construct(array $configuration)
     {
-        if (!isset($configuration['modules'])) {
+        if (! isset($configuration['modules'])) {
             $modules = $configuration;
             $configuration = [
                 'module_listener_options' => [

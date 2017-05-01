@@ -92,14 +92,14 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertResponseHeaderContains($header, $match)
     {
         $responseHeader = $this->getResponseHeader($header);
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
         }
 
-        if (!$responseHeader instanceof \ArrayIterator) {
+        if (! $responseHeader instanceof \ArrayIterator) {
             $responseHeader = [$responseHeader];
         }
 
@@ -112,7 +112,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
             }
         }
 
-        if (!$headerMatched) {
+        if (! $headerMatched) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header "%s" exists and contains "%s", actual content is "%s"',
                 $header,
@@ -133,14 +133,14 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertNotResponseHeaderContains($header, $match)
     {
         $responseHeader = $this->getResponseHeader($header);
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
         }
 
-        if (!$responseHeader instanceof \ArrayIterator) {
+        if (! $responseHeader instanceof \ArrayIterator) {
             $responseHeader = [$responseHeader];
         }
 
@@ -166,14 +166,14 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertResponseHeaderRegex($header, $pattern)
     {
         $responseHeader = $this->getResponseHeader($header);
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
         }
 
-        if (!$responseHeader instanceof \ArrayIterator) {
+        if (! $responseHeader instanceof \ArrayIterator) {
             $responseHeader = [$responseHeader];
         }
 
@@ -187,7 +187,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
             }
         }
 
-        if (!$headerMatched) {
+        if (! $headerMatched) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header "%s" exists and matches regex "%s", actual content is "%s"',
                 $header,
@@ -208,14 +208,14 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertNotResponseHeaderRegex($header, $pattern)
     {
         $responseHeader = $this->getResponseHeader($header);
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             )));
         }
 
-        if (!$responseHeader instanceof \ArrayIterator) {
+        if (! $responseHeader instanceof \ArrayIterator) {
             $responseHeader = [$responseHeader];
         }
 
@@ -273,7 +273,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertRedirectTo($url)
     {
         $responseHeader = $this->getResponseHeader('Location');
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
@@ -296,7 +296,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertNotRedirectTo($url)
     {
         $responseHeader = $this->getResponseHeader('Location');
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
@@ -318,12 +318,12 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertRedirectRegex($pattern)
     {
         $responseHeader = $this->getResponseHeader('Location');
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
         }
-        if (!preg_match($pattern, $responseHeader->getFieldValue())) {
+        if (! preg_match($pattern, $responseHeader->getFieldValue())) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting response redirects to URL MATCHING "%s", actual redirection is "%s"',
                 $pattern,
@@ -341,7 +341,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     public function assertNotRedirectRegex($pattern)
     {
         $responseHeader = $this->getResponseHeader('Location');
-        if (!$responseHeader) {
+        if (! $responseHeader) {
             throw new ExpectationFailedException($this->createFailureMessage(
                 'Failed asserting response is a redirect'
             ));
@@ -433,7 +433,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     {
         $method = $useXpath ? 'xpathQueryCount' : 'queryCount';
         $match = $this->$method($path);
-        if (!$match > 0) {
+        if (! $match > 0) {
             throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting node DENOTED BY %s EXISTS',
                 $path
