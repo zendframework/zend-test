@@ -15,16 +15,15 @@ use Zend\Router\Http\RouteMatch;
 use Zend\Stdlib\Parameters;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\View\Model\ViewModel;
-
-if (! class_exists(ExpectationFailedException::class)) {
-    class_alias(\PHPUnit_Framework_ExpectationFailedException::class, ExpectationFailedException::class);
-}
+use ZendTest\Test\ExpectedExceptionTrait;
 
 /**
  * @group      Zend_Test
  */
 class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
+    use ExpectedExceptionTrait;
+
     public function setUp()
     {
         $this->setApplicationConfig(
@@ -43,7 +42,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertResponseStatusCode(200);
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual status code is "200"' // check actual code is display
         );
@@ -55,7 +54,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotResponseStatusCode(302);
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotResponseStatusCode(200);
     }
 
@@ -64,7 +63,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertHasResponseHeader('Content-Type');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertHasResponseHeader('Unknow-header');
     }
 
@@ -73,7 +72,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotHasResponseHeader('Unknow-header');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotHasResponseHeader('Content-Type');
     }
 
@@ -82,7 +81,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertResponseHeaderContains('Content-Type', 'text/html');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual content is "text/html"' // check actual content is display
         );
@@ -100,7 +99,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotResponseHeaderContains('Content-Type', 'text/json');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotResponseHeaderContains('Content-Type', 'text/html');
     }
 
@@ -115,7 +114,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertResponseHeaderRegex('Content-Type', '#html$#');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual content is "text/html"' // check actual content is display
         );
@@ -133,7 +132,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotResponseHeaderRegex('Content-Type', '#json#');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotResponseHeaderRegex('Content-Type', '#html$#');
     }
 
@@ -148,7 +147,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/redirect');
         $this->assertRedirect();
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual redirection is "http://www.zend.com"' // check actual redirection is display
         );
@@ -160,7 +159,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/test');
         $this->assertNotRedirect();
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertRedirect();
     }
 
@@ -169,7 +168,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/redirect');
         $this->assertRedirectTo('http://www.zend.com');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual redirection is "http://www.zend.com"' // check actual redirection is display
         );
@@ -181,7 +180,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/redirect');
         $this->assertNotRedirectTo('http://www.zend.fr');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotRedirectTo('http://www.zend.com');
     }
 
@@ -190,7 +189,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/redirect');
         $this->assertRedirectRegex('#zend\.com$#');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual redirection is "http://www.zend.com"' // check actual redirection is display
         );
@@ -202,7 +201,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/redirect');
         $this->assertNotRedirectRegex('#zend\.fr#');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotRedirectRegex('#zend\.com$#');
     }
 
@@ -211,7 +210,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertQuery('form#myform');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertQuery('form#id');
     }
 
@@ -220,7 +219,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertXpathQuery('//form[@id="myform"]');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertXpathQuery('//form[@id="id"]');
     }
 
@@ -228,7 +227,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/tests');
 
-        $this->setExpectedException('ErrorException');
+        $this->expectedException('ErrorException');
         $this->assertXpathQuery('form#myform');
     }
 
@@ -237,7 +236,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotQuery('form#id');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotQuery('form#myform');
     }
 
@@ -246,7 +245,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotXpathQuery('//form[@id="id"]');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotXpathQuery('//form[@id="myform"]');
     }
 
@@ -255,7 +254,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertQueryCount('div.top', 3);
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actually occurs 3 times' // check actual occurs is display
         );
@@ -267,7 +266,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertXpathQueryCount('//div[@class="top"]', 3);
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actually occurs 3 times' // check actual occurs is display
         );
@@ -286,7 +285,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertNotQueryCount('div.top', 1);
         $this->assertNotQueryCount('div.top', 2);
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotQueryCount('div.top', 3);
     }
 
@@ -296,7 +295,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertNotXpathQueryCount('//div[@class="top"]', 1);
         $this->assertNotXpathQueryCount('//div[@class="top"]', 2);
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotXpathQueryCount('//div[@class="top"]', 3);
     }
 
@@ -307,7 +306,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCountMin('div.top', 2);
         $this->assertQueryCountMin('div.top', 3);
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actually occurs 3 times' // check actual occurs is display
         );
@@ -321,7 +320,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertXpathQueryCountMin('//div[@class="top"]', 2);
         $this->assertXpathQueryCountMin('//div[@class="top"]', 3);
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actually occurs 3 times' // check actual occurs is display
         );
@@ -335,7 +334,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCountMax('div.top', 4);
         $this->assertQueryCountMax('div.top', 3);
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actually occurs 3 times' // check actual occurs is display
         );
@@ -349,7 +348,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertXpathQueryCountMax('//div[@class="top"]', 4);
         $this->assertXpathQueryCountMax('//div[@class="top"]', 3);
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actually occurs 3 times' // check actual occurs is display
         );
@@ -361,7 +360,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertQueryContentContains('div#content', 'foo');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class
         );
         $this->assertQueryContentContains('div#content', 'bar');
@@ -372,7 +371,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertQueryContentContains('div#content', 'foo');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class
         );
         $this->assertQueryContentContains('div.top', 'bar');
@@ -383,7 +382,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertXpathQueryContentContains('//div[@class="top"]', 'foo');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class
         );
         $this->assertXpathQueryContentContains('//div[@class="top"]', 'bar');
@@ -394,7 +393,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotQueryContentContains('div#content', 'bar');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotQueryContentContains('div#content', 'foo');
     }
 
@@ -403,7 +402,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotXpathQueryContentContains('//div[@id="content"]', 'bar');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotXpathQueryContentContains('//div[@id="content"]', 'foo');
     }
 
@@ -412,7 +411,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertQueryContentRegex('div#content', '#o{2}#');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual content is "foo"' // check actual content is display
         );
@@ -424,7 +423,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertQueryContentRegex('div.top', '#o{2}#');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual content is "foo"' // check actual content is display
         );
@@ -435,7 +434,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/tests');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual content is "foofoofoobar"' // check actual content is display
         );
@@ -447,7 +446,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertXpathQueryContentRegex('//div[@id="content"]', '#o{2}#');
 
-        $this->setExpectedException(
+        $this->expectedException(
             ExpectationFailedException::class,
             'actual content is "foo"' // check actual content is display
         );
@@ -459,7 +458,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotQueryContentRegex('div#content', '#o{3,}#');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotQueryContentRegex('div#content', '#o{2}#');
     }
 
@@ -468,7 +467,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertNotXpathQueryContentRegex('//div[@id="content"]', '#o{3,}#');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotXpathQueryContentRegex('//div[@id="content"]', '#o{2}#');
     }
 
@@ -695,7 +694,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             parent::tearDown();
         } catch (\Exception $e) {
             $this->getApplication()->getMvcEvent()->setParam('exception', null);
-            $this->setExpectedException('RuntimeException', 'Foo error');
+            $this->expectedException('RuntimeException', 'Foo error');
             throw $e;
         }
     }
@@ -763,7 +762,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertResponseReasonPhrase('OK');
 
-        $this->setExpectedException(ExpectationFailedException::class);
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertResponseReasonPhrase('NOT OK');
     }
 

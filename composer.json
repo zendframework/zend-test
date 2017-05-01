@@ -51,6 +51,9 @@
     "autoload-dev": {
         "psr-4": {
             "ZendTest\\Test\\": "test/"
-        }
+        },
+        "files": [
+            "autoload/phpunit-class-aliases.php"
+        ]
     }
 }
