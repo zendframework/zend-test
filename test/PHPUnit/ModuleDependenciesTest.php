@@ -9,13 +9,17 @@
 
 namespace ZendTest\Test\PHPUnit;
 
+use PHPUnit\Framework\ExpectationFailedException;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use ZendTest\Test\ExpectedExceptionTrait;
 
 /**
  * @group      Zend_Test
  */
 class ModuleDependenciesTest extends AbstractHttpControllerTestCase
 {
+    use ExpectedExceptionTrait;
+
     public function testDependenciesModules()
     {
         $this->setApplicationConfig(
@@ -26,7 +30,7 @@ class ModuleDependenciesTest extends AbstractHttpControllerTestCase
         $this->assertEquals(true, $sm->has('BarObject'));
 
         $this->assertModulesLoaded(['Foo', 'Bar']);
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertModulesLoaded(['Foo', 'Bar', 'Unknow']);
     }
 
@@ -40,7 +44,7 @@ class ModuleDependenciesTest extends AbstractHttpControllerTestCase
         $this->assertEquals(true, $sm->has('BarObject'));
 
         $this->assertNotModulesLoaded(['Foo']);
-        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->expectedException(ExpectationFailedException::class);
         $this->assertNotModulesLoaded(['Foo', 'Bar']);
     }
 }

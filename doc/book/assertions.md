@@ -68,16 +68,25 @@ and max counts do not have these variants, for what should be obvious reasons.)
 Some developers are more familiar with XPath than with CSS selectors, and thus
 XPath variants of all the Query assertions are also provided. These are:
 
-- `assertXpathQuery($path)`
-- `assertNotXpathQuery($path)`
-- `assertXpathQueryCount($path, $count)`
-- `assertNotXpathQueryCount($path, $count)`
-- `assertXpathQueryCountMin($path, $count)`
-- `assertXpathQueryCountMax($path, $count)`
-- `assertXpathQueryContentContains($path, $match)`
-- `assertNotXpathQueryContentContains($path, $match)`
-- `assertXpathQueryContentRegex($path, $pattern)`
-- `assertNotXpathQueryContentRegex($path, $pattern)`
+- `assertXpathQuery($path)`: assert against the given XPath selection
+- `assertNotXpathQuery($path)`: assert against the given XPath selection;
+  negative assertions
+- `assertXpathQueryCount($path, $count)`: assert against XPath selection; should
+  contain exact number of nodes
+- `assertNotXpathQueryCount($path, $count)`: assert against DOM/XPath selection;
+  should not contain exact number of nodes
+- `assertXpathQueryCountMin($path, $count)`: assert against XPath selection;
+  should contain at least this number of nodes
+- `assertXpathQueryCountMax($path, $count)`: assert against XPath selection;
+  should contain no more than this number of nodes
+- `assertXpathQueryContentContains($path, $match)`: assert against XPath
+  selection; node should contain content
+- `assertNotXpathQueryContentContains($path, $match)`: assert against XPath
+ selection; node should not contain content
+- `assertXpathQueryContentRegex($path, $pattern)`: assert against XPath
+  selection; node should match content
+- `assertNotXpathQueryContentRegex($path, $pattern)`: assert against XPath
+  selection; node should not match content
 
 ## Redirect Assertions
 
@@ -109,6 +118,24 @@ following assertions are available.
   contains the given header and that its content contains the given string.
 - `assertResponseHeaderRegex($header, $pattern)`: assert that the response
   contains the given header and that its content matches the given regex.
+- `assertHasResponseHeader($header)`: assert that the response header exists.
 
 Additionally, each of the above assertions have a 'Not' variant for negative assertions.
+
+- `assertResponseReasonPhrase($phrase)`: assert the the response has the given
+  reason phrase
+
+## Other Assertions
+
+### Application Exceptions
+
+- `assertApplicationException($type, $message = null)`: assert the given 
+  application exception type and message.
+
+### Template name
+
+- `assertTemplateName($templateName)`: assert that a template was used somewhere
+  in the view model tree.
+- `assertNotTemplateName($templateName)`: assert that a template was not used
+  somewhere in the view model tree.
 

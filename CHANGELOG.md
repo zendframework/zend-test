@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.1.0 - TBD
+
+### Added
+
+- [#40](https://github.com/zendframework/zend-test/pull/40) and
+  [#48](https://github.com/zendframework/zend-test/pull/48) add support for
+  the PHPUnit 6 series, while retaining support for PHPUnit 4 and 5.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.0.3 - TBD
 
 ### Added

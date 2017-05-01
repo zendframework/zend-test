@@ -9,7 +9,7 @@
  */
 namespace Zend\Test\PHPUnit\Controller;
 
-use PHPUnit_Framework_ExpectationFailedException;
+use PHPUnit\Framework\ExpectationFailedException;
 
 abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestCase
 {
@@ -29,7 +29,7 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
     {
         $response = $this->getResponse();
         if (false === stripos($response->getContent(), $match)) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(
+            throw new ExpectationFailedException($this->createFailureMessage(
                 sprintf(
                     'Failed asserting output CONTAINS content "%s", actual content is "%s"',
                     $match,
@@ -50,7 +50,7 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
     {
         $response = $this->getResponse();
         if (false !== stripos($response->getContent(), $match)) {
-            throw new PHPUnit_Framework_ExpectationFailedException($this->createFailureMessage(sprintf(
+            throw new ExpectationFailedException($this->createFailureMessage(sprintf(
                 'Failed asserting output DOES NOT CONTAIN content "%s"',
                 $match
             )));

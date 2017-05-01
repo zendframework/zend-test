@@ -1,16 +1,16 @@
 <?php
-return array(
-    'modules' => array(
+return [
+    'modules' => [
         'Zend\Router',
         'Zend\Validator',
         'Baz',
         'ModuleWithEvents',
-    ),
-    'module_listener_options' => array(
-        'config_static_paths' => array(),
-        'module_paths'        => array(
+    ],
+    'module_listener_options' => [
+        'config_static_paths' => [],
+        'module_paths'        => [
             'Baz' => __DIR__ . '/Baz/',
             'ModuleWithEvents' => __DIR__ . '/ModuleWithEvents/',
-        ),
-    ),
-);
+        ],
+    ],
+];

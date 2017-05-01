@@ -8,11 +8,15 @@
  */
 namespace ZendTest\Test\PHPUnit\Util;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
+use Zend\ModuleManager\Exception\RuntimeException;
 use Zend\Test\Util\ModuleLoader;
+use ZendTest\Test\ExpectedExceptionTrait;
 
-class ModuleLoaderTest extends PHPUnit_Framework_TestCase
+class ModuleLoaderTest extends TestCase
 {
+    use ExpectedExceptionTrait;
+
     public function tearDownCacheDir()
     {
         $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
@@ -52,7 +56,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testCanNotLoadModule()
     {
-        $this->setExpectedException('Zend\ModuleManager\Exception\RuntimeException', 'could not be initialized');
+        $this->expectedException(RuntimeException::class, 'could not be initialized');
         $loader = new ModuleLoader(['FooBaz']);
     }
 
