@@ -18,7 +18,10 @@
     "autoload": {
         "psr-4": {
             "Zend\\Test\\": "src/"
-        }
+        },
+        "files": [
+            "autoload/phpunit-class-aliases.php"
+        ]
     },
     "require": {
         "php": "^5.6 || ^7.0",
@@ -59,10 +62,7 @@
     "autoload-dev": {
         "psr-4": {
             "ZendTest\\Test\\": "test/"
-        },
-        "files": [
-            "autoload/phpunit-class-aliases.php"
-        ]
+        }
     },
     "scripts": {
         "check": [
