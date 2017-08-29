@@ -252,7 +252,7 @@ abstract class AbstractControllerTestCase extends TestCase
             if (count($params) != 0) {
                 $post = $params;
             }
-        } elseif ($method == HttpRequest::METHOD_GET) {
+        } elseif ($method == HttpRequest::METHOD_GET || $method == HttpRequest::METHOD_DELETE) {
             $query = array_merge($query, $params);
         } elseif ($method == HttpRequest::METHOD_PUT || $method == HttpRequest::METHOD_PATCH) {
             if (count($params) != 0) {
