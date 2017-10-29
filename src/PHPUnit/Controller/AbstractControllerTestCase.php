@@ -490,7 +490,8 @@ abstract class AbstractControllerTestCase extends TestCase
             $this->getApplication()->getMvcEvent()->setParam('exception', null);
         }
 
-        if (method_exists($this, 'setExpectedException')) {
+        if (! method_exists($this, 'expectException')) {
+            // For old PHPUnit 4
             $this->setExpectedException($type, $message);
         } else {
             $this->expectException($type);
