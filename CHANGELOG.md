@@ -18,7 +18,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#55](https://github.com/zendframework/zend-test/pull/55) Fixes compatibility
+  with PHPUnit 5.7.23 where empty expected exception message no longer means
+  message is not checked.
 
 ## 3.1.0 - 2017-05-01
 
