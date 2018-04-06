@@ -24,7 +24,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#60](https://github.com/zendframework/zend-test/pull/60) Added support for
+  PHPUnit 7
 
 ### Deprecated
 
