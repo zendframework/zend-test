@@ -129,7 +129,7 @@ Additionally, each of the above assertions have a 'Not' variant for negative ass
 
 ### Application Exceptions
 
-- `assertApplicationException($type, $message = null)`: assert the given 
+- `assertApplicationException($type, $message = null)`: assert the given
   application exception type and message.
 
 ### Template name
