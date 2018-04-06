@@ -1,27 +1,19 @@
 {
     "name": "zendframework/zend-test",
-    "description": " ",
+    "description": "Tools to facilitate unit testing of zend-mvc applications",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "zendframework",
+        "zf",
         "test"
     ],
-    "homepage": "https://github.com/zendframework/zend-test",
-    "config": {
-        "sort-packages": true
-    },
     "support": {
         "docs": "https://docs.zendframework.com/zend-test/",
-        "forum": "https://discourse.zendframework.com/c/questions/components",
-        "issues": "https://github.com/zendframework/zend-test/issues"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Test\\": "src/"
-        },
-        "files": [
-            "autoload/phpunit-class-aliases.php"
-        ]
+        "issues": "https://github.com/zendframework/zend-test/issues",
+        "source": "https://github.com/zendframework/zend-test",
+        "rss": "https://github.com/zendframework/zend-test/releases.atom",
+        "slack": "https://zendframework-slack.herokuapp.com",
+        "forum": "https://discourse.zendframework.com/c/questions/components"
     },
     "require": {
         "php": "^5.6 || ^7.0",
@@ -53,15 +45,26 @@
     "suggest": {
         "zendframework/zend-mvc-console": "^1.1.8, to test MVC <-> console integration"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.1-dev",
-            "dev-develop": "3.2-dev"
+    "autoload": {
+        "files": [
+            "autoload/phpunit-class-aliases.php"
+        ],
+        "psr-4": {
+            "Zend\\Test\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "ZendTest\\Test\\": "test/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.1.x-dev",
+            "dev-develop": "3.2.x-dev"
         }
     },
     "scripts": {
