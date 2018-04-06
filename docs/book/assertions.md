@@ -33,11 +33,11 @@ for JavaScript UIs and/or AJAX integration will be present; most JS toolkits
 provide some mechanism for manipulating DOM elements based on CSS selectors, so
 the syntax would be the same.
 
-This functionality is provided via [Zend\\Dom\\Query](https://zendframework.github.io/zend-dom/query/),
+This functionality is provided via [Zend\\Dom\\Query](https://docs.zendframework.com/zend-dom/query/),
 and integrated into a set of 'Query' assertions. Each of these assertions takes
 as their first argument a CSS selector, with optionally additional arguments
 and/or an error message, based on the assertion type. You can find the rules for
-writing the CSS selectors in the zend-dom [Theory of Operation](https://zendframework.github.io/zend-dom/query/#theory-of-operation)
+writing the CSS selectors in the zend-dom [Theory of Operation](https://docs.zendframework.com/zend-dom/query/#theory-of-operation)
 chapter. Query assertions include:
 
 - `assertQuery($path)`: assert that one or more DOM elements matching the given
