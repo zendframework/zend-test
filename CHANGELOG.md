@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#65](https://github.com/zendframework/zend-test/pull/65) Added support for
+  query parameters in DELETE request in AbstractControllerTestCase
 
 ### Deprecated
 
