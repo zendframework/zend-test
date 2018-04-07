@@ -507,4 +507,10 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/custom-response', $method, null);
         $this->assertResponseStatusCode(999);
     }
+
+    public function testQueryParamsDelete()
+    {
+        $this->dispatch('/tests', 'DELETE', ['foo' => 'bar']);
+        $this->assertEquals('foo=bar', $this->getRequest()->getQuery()->toString());
+    }
 }
