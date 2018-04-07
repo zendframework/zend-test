@@ -174,11 +174,11 @@ the response content.  They also make it trivial to ensure that items necessary
 for JavaScript UIs and/or AJAX integration will be present; most JS toolkits
 provide some mechanism for manipulating DOM elements based on CSS selectors, so
 the syntax would be the same.</p>
-<p>This functionality is provided via <a href="https://zendframework.github.io/zend-dom/query/">Zend\Dom\Query</a>,
+<p>This functionality is provided via <a href="https://docs.zendframework.com/zend-dom/query/">Zend\Dom\Query</a>,
 and integrated into a set of 'Query' assertions. Each of these assertions takes
 as their first argument a CSS selector, with optionally additional arguments
 and/or an error message, based on the assertion type. You can find the rules for
-writing the CSS selectors in the zend-dom <a href="https://zendframework.github.io/zend-dom/query/#theory-of-operation">Theory of Operation</a>
+writing the CSS selectors in the zend-dom <a href="https://docs.zendframework.com/zend-dom/query/#theory-of-operation">Theory of Operation</a>
 chapter. Query assertions include:</p>
 <ul>
 <li><code>assertQuery($path)</code>: assert that one or more DOM elements matching the given
@@ -263,7 +263,7 @@ following assertions are available.</p>
 <h2 id="other-assertions">Other Assertions</h2>
 <h3 id="application-exceptions">Application Exceptions</h3>
 <ul>
-<li><code>assertApplicationException($type, $message = null)</code>: assert the given 
+<li><code>assertApplicationException($type, $message = null)</code>: assert the given
   application exception type and message.</li>
 </ul>
 <h3 id="template-name">Template name</h3>
