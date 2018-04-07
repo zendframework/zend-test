@@ -492,6 +492,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         yield 'null' => [null];
         yield 'get' => ['GET'];
+        yield 'delete' => ['DELETE'];
         yield 'post' => ['POST'];
         yield 'put' => ['PUT'];
         yield 'patch' => ['PATCH'];
