@@ -2,31 +2,14 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.2.0 - TBD
-
-### Added
-
-- [#65](https://github.com/zendframework/zend-test/pull/65) Added support for
-  query parameters in DELETE request in AbstractControllerTestCase
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 3.1.2 - TBD
+## 3.2.0 - 2018-04-07
 
 ### Added
 
 - [#60](https://github.com/zendframework/zend-test/pull/60) Added support for
   PHPUnit 7
+- [#65](https://github.com/zendframework/zend-test/pull/65) Added support for
+  query parameters in DELETE request in AbstractControllerTestCase
 
 ### Deprecated
 
