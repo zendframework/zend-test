@@ -241,6 +241,9 @@ abstract class AbstractControllerTestCase extends TestCase
 
         $query       = $request->getQuery()->toArray();
         $post        = $request->getPost()->toArray();
+        if($method == HttpRequest::METHOD_GET && $url == '/') {
+            $url .= '?'.http_build_query($params);
+        }
         $uri         = new HttpUri($url);
         $queryString = $uri->getQuery();
 
