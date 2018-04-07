@@ -37,7 +37,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#63](https://github.com/zendframework/zend-test/pull/63) Fixed compatibility
+  with PHP 7.2
 
 ## 3.1.1 - 2017-10-29
 

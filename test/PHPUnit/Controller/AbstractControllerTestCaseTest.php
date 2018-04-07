@@ -487,4 +487,24 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->assertFalse(array_key_exists('_SESSION', $GLOBALS));
     }
+
+    public function method()
+    {
+        yield 'null' => [null];
+        yield 'get' => ['GET'];
+        yield 'post' => ['POST'];
+        yield 'put' => ['PUT'];
+        yield 'patch' => ['PATCH'];
+    }
+
+    /**
+     * @dataProvider method
+     *
+     * @param null|string $method
+     */
+    public function testDispatchWithNullParams($method)
+    {
+        $this->dispatch('/custom-response', $method, null);
+        $this->assertResponseStatusCode(999);
+    }
 }
