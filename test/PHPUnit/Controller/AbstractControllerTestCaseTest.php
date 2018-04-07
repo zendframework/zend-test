@@ -492,6 +492,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         yield 'null' => [null];
         yield 'get' => ['GET'];
+        yield 'delete' => ['DELETE'];
         yield 'post' => ['POST'];
         yield 'put' => ['PUT'];
         yield 'patch' => ['PATCH'];
@@ -506,5 +507,11 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/custom-response', $method, null);
         $this->assertResponseStatusCode(999);
+    }
+
+    public function testQueryParamsDelete()
+    {
+        $this->dispatch('/tests', 'DELETE', ['foo' => 'bar']);
+        $this->assertEquals('foo=bar', $this->getRequest()->getQuery()->toString());
     }
 }

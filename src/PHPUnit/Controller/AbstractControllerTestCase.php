@@ -254,6 +254,7 @@ abstract class AbstractControllerTestCase extends TestCase
                     $post = $params;
                     break;
                 case HttpRequest::METHOD_GET:
+                case HttpRequest::METHOD_DELETE:
                     $query = array_merge($query, $params);
                     break;
                 case HttpRequest::METHOD_PUT:
