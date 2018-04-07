@@ -2,27 +2,14 @@ sudo: false
 
 language: php
 
-branches:
-  except:
-    - /^release-.*$/
-    - /^ghgfk-.*$/
-
 cache:
   directories:
     - $HOME/.composer/cache
-    - $HOME/.local
-    - zf-mkdoc-theme
 
 env:
   global:
     - COMPOSER_ARGS="--no-interaction"
     - COVERAGE_DEPS="satooshi/php-coveralls"
-    - LEGACY_DEPS="phpunit/phpunit"
-    - SITE_URL: https://zendframework.github.io/zend-test
-    - GH_USER_NAME: "Matthew Weier O'Phinney"
-    - GH_USER_EMAIL: matthew@weierophinney.net
-    - GH_REF: github.com/zendframework/zend-test.git
-    - secure: "Sc1ia3JTWCQoOs+kTLWSKf3EYQQLHyD5GqFX/YI8+HhBf/b7/GxGYNJ4QC+Xw+XBNbVV0NJ4KsvHdssd7B3WaUjgBSOn6rLY+8WGdbahZstmvnHEuCaYuqnkLdT66L+LHhnH4Pbo0iCPMkpltNCbnM2yw4xcZtOpmd/p/VgNUQK6+L21n/eGx+QWHmBJpkvtWR1uKwsyUf9512tcPNoy9m0gug2SEEeAHYG4J9HVySwmHNhaW7w2Hn4iA8rgKKZ4kBWXawada1KyESDoqebBOwWJr3htuTczvwY+3sv2nkZ3LjxwjReVBJGkOmAXV78AcaLhvTLah05pX9gq02Hxe9BUndrQxHfH6FStOnzcviMOu2eb+3SBXze31pJYAycjGct8LIe0N+2vhUTeNVVaNvSZubcKMRfLvm2+ytg8xQekUhhqQtG5YgTJK7AsP9XwmeocgV0XWgliBhTkiTP2Kd07qUQzBiU1vwbLeDidaQYTyzAXq45BsxFPfWbdfJrkqtlaU+peh0IaFQN1sUJP9CJb/Ekm+GSWWk+YhHhtpyLJhGvbf8dMtITFn8LzJKrO5Fx8Ben9H5+HVdzeNGLY77pzrzeezfGSsegP1y30BwgwIBEMx9gHR58pATI/IP+NtpXKtjD16btarq4mNGKGlbAVjQXsfvhez8S2QnTbFOE="
 
 matrix:
   include:
@@ -32,6 +19,7 @@ matrix:
     - php: 5.6
       env:
         - DEPS=locked
+        - LEGACY_DEPS="phpunit/phpunit"
     - php: 5.6
       env:
         - DEPS=latest
@@ -41,9 +29,7 @@ matrix:
     - php: 7
       env:
         - DEPS=locked
-        - CS_CHECK=true
-        - DEPLOY_DOCS="$(if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then echo -n 'true' ; else echo -n 'false' ; fi)"
-        - PATH="$HOME/.local/bin:$PATH"
+        - LEGACY_DEPS="phpunit/phpunit"
     - php: 7
       env:
         - DEPS=latest
@@ -52,50 +38,40 @@ matrix:
         - DEPS=lowest
     - php: 7.1
       env:
-        - TEST_COVERAGE=true
         - DEPS=locked
+        - CS_CHECK=true
+        - TEST_COVERAGE=true
     - php: 7.1
       env:
         - DEPS=latest
-    - php: hhvm
-      env:
-        - DEPS=lowest
-    - php: hhvm
+    # Disabled because PHPUnit 4.0 is not compatible with PHP 7.2
+    # - php: 7.2
+    #   env:
+    #     - DEPS=lowest
+    - php: 7.2
       env:
         - DEPS=locked
-    - php: hhvm
+    - php: 7.2
       env:
         - DEPS=latest
-  allow_failures:
-    - php: hhvm
 
 before_install:
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
-  - travis_retry composer self-update
 
 install:
   - travis_retry composer install $COMPOSER_ARGS --ignore-platform-reqs
-  - if [[ $TRAVIS_PHP_VERSION =~ ^5.6 ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies $LEGACY_DEPS ; fi
+  - if [[ $LEGACY_DEPS != '' ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies $LEGACY_DEPS ; fi
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
   - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $COVERAGE_DEPS ; fi
-  - composer show
+  - stty cols 120 && composer show
 
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
-  - if [[ $DEPLOY_DOCS == "true" && "$TRAVIS_TEST_RESULT" == "0" ]]; then wget -O theme-installer.sh "https://raw.githubusercontent.com/zendframework/zf-mkdoc-theme/master/theme-installer.sh" ; chmod 755 theme-installer.sh ; ./theme-installer.sh ; fi
-
-after_success:
-  - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation" ; ./zf-mkdoc-theme/deploy.sh ; echo "Completed deploying documentation" ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer upload-coverage ; fi
 
 notifications:
   email: false
-  slack:
-    rooms:
-      - secure: "QbJcG0o3KQbqwXQ9BR1IVd2+nsasZNNo6oWgOm960fYf24ErS5oUQJa7rrzZHADdAbUq/wnnJu4+hMKgeDR0hBznvM6zZfEnOWOWUzhhjaSzCqsUZWv7XxV7ndWtvpXP3k9ur44t4l4Yu7WuKiJh3SdVUxJYOP3pgY8OE1ugfbkkvOP/MAidbynS3OUUHnQfwQhpXnhirAzuPRGbEmhng8w4HXqEv0gbqlcWYtAaRDxCRmDuQfb4tucimKMXa7r41eRmBSBh8XUWzOvqp+Athwmb4Ihv0pJZJfzrvoRVOwf2tG7QnFpDW6GmYk2/FApubQOTZxDYbdnEtILaEmTA/hEDpoSNfcaIH533YXOqS8LSUE8z1VFHz6dZyIrQRjfaHIxmxCPQDpVVevvZL/Bm9yLbCou4g7eRPIQAJPbyyH+pnnj1EsOO6TgBMn6IiY33TuF8VjqmB9p9BlCaag3D56lsFSQq6XgsC47er6Jw93h6UPDJhWMAdMa41HPTx9ofIiM05Jw9NuR0SokLEIw8tbRLNvbpDWxVijI5Uzeb6QWJHgtrO9dZcWkoDOGXsW2eSoWhRKdtzdqcbdCEXxwpX535g9g571Wd4nd1mXU4Hn0d7UPOz1mUZnh4SnaCCWwwtIiTIpYArEQOLcy5g/DEOtzDhKzJvs/8bvRbQiSC21M="
-    on_success: change
-    on_failure: always

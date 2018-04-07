@@ -8,8 +8,8 @@
  */
 namespace Zend\Test\PHPUnit\Controller;
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\TestCase;
 use Zend\Console\Console;
 use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request as HttpRequest;
@@ -248,22 +248,25 @@ abstract class AbstractControllerTestCase extends TestCase
             parse_str($queryString, $query);
         }
 
-        if ($method == HttpRequest::METHOD_POST) {
-            if (count($params) != 0) {
-                $post = $params;
+        if ($params) {
+            switch ($method) {
+                case HttpRequest::METHOD_POST:
+                    $post = $params;
+                    break;
+                case HttpRequest::METHOD_GET:
+                    $query = array_merge($query, $params);
+                    break;
+                case HttpRequest::METHOD_PUT:
+                case HttpRequest::METHOD_PATCH:
+                    $content = http_build_query($params);
+                    $request->setContent($content);
+                    break;
+                default:
+                    trigger_error(
+                        'Additional params is only supported by GET, POST, PUT and PATCH HTTP method',
+                        E_USER_NOTICE
+                    );
             }
-        } elseif ($method == HttpRequest::METHOD_GET) {
-            $query = array_merge($query, $params);
-        } elseif ($method == HttpRequest::METHOD_PUT || $method == HttpRequest::METHOD_PATCH) {
-            if (count($params) != 0) {
-                $content = http_build_query($params);
-                $request->setContent($content);
-            }
-        } elseif ($params) {
-            trigger_error(
-                'Additional params is only supported by GET, POST, PUT and PATCH HTTP method',
-                E_USER_NOTICE
-            );
         }
 
         $request->setMethod($method);
