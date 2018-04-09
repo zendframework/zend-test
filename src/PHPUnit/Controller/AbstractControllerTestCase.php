@@ -88,6 +88,14 @@ abstract class AbstractControllerTestCase extends TestCase
     protected function tearDown()
     {
         Console::overrideIsConsole($this->usedConsoleBackup);
+
+        // Restore the original environment
+        $_POST   = $this->originalEnvironment['post'];
+        $_GET    = $this->originalEnvironment['get'];
+        $_COOKIE = $this->originalEnvironment['cookie'];
+        $_SERVER = $this->originalEnvironment['server'];
+        $_ENV    = $this->originalEnvironment['env'];
+        $_FILES  = $this->originalEnvironment['files'];
     }
 
     /**
