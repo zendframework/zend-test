@@ -19,6 +19,14 @@ abstract class AbstractConsoleControllerTestCase extends AbstractControllerTestC
      */
     protected $useConsoleRequest = true;
 
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $_SERVER['args'] = 0;
+        $_SERVER['argv'] = [];
+    }
+
     /**
      * Assert console output contain content (insensible case)
      *

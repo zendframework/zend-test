@@ -121,6 +121,16 @@ return [
                     ],
                 ],
             ],
+            'parametrized' => [
+                'type' => 'segment',
+                'options' => [
+                    'route'    => '/with-param/:param',
+                    'defaults' => [
+                        'controller' => 'baz_index',
+                        'action'     => 'unittests',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
