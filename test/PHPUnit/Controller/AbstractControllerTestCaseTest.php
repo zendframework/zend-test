@@ -8,6 +8,7 @@
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use Generator;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -513,5 +514,25 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/tests', 'DELETE', ['foo' => 'bar']);
         $this->assertEquals('foo=bar', $this->getRequest()->getQuery()->toString());
+    }
+
+    /**
+     * @return Generator
+     */
+    public function routeParam()
+    {
+        yield 'phpunit' => ['phpunit'];
+        yield 'param' => ['param'];
+    }
+
+    /**
+     * @dataProvider routeParam
+     *
+     * @param string $param
+     */
+    public function testRequestWithRouteParam($param)
+    {
+        $this->dispatch(sprintf('/with-param/%s', $param));
+        $this->assertResponseStatusCode(200);
     }
 }
