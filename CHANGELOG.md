@@ -44,7 +44,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#66](https://github.com/zendframework/zend-test/pull/66) Fixes globals not
+  cleared for controller tests
 
 ## 3.2.0 - 2018-04-07
 
