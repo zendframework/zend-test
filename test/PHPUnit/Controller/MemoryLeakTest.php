@@ -46,8 +46,8 @@ class MemoryLeakTest extends AbstractControllerTestCase
         $this->assertNull($null);
 
         if (version_compare(phpversion(), '7.0.0', '<')) {
-            // Test memory consumption is limited to 2 MB for 100 tests on PHP 5.6
-            $this->assertLessThan(2097152, memory_get_usage(true) - self::$mem_start);
+            // Test memory consumption is limited to 5 MB for 100 tests on PHP 5.6
+            $this->assertLessThan(5242880, memory_get_usage(true) - self::$mem_start);
         } else {
             $this->assertEquals(0, memory_get_usage(true) - self::$mem_start);
         }
