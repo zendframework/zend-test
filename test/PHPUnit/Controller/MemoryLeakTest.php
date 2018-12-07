@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-test for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-test/blob/master/LICENSE.md New BSD License
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
@@ -12,10 +10,12 @@ use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 
 class MemoryLeakTest extends AbstractControllerTestCase
 {
-    const MAX_MEMORY_USAGE_PHP7 = 24 * 1024 * 1024; // 24 MB
-    const MAX_MEMORY_USAGE_PHP5 = 52 * 1024 * 1024; // 52 MB
+    public static $mem_start;
 
-    public static $memory_usage;
+    public static function setUpBeforeClass()
+    {
+        self::$mem_start = memory_get_usage(true);
+    }
 
     public function setUp()
     {
@@ -31,23 +31,25 @@ class MemoryLeakTest extends AbstractControllerTestCase
         );
     }
 
-    public static function dataProvider()
+    public static function dataForMultipleTests()
     {
-        return array_fill(0, 1000, [ null ]);
+        return array_fill(0, 100, [null]);
     }
 
     /**
-     * @dataProvider dataProvider
+     * @dataProvider dataForMultipleTests
      */
-    public function testMemoryConsumptionLessThan($variable)
+    public function testMemoryConsumptionNotGrowing($null)
     {
         $this->getApplication();
 
-        $this->assertNull($variable);
+        $this->assertNull($null);
+
         if (version_compare(phpversion(), '7.0.0', '<')) {
-            $this->assertLessThan(self::MAX_MEMORY_USAGE_PHP5, memory_get_usage(true));
+            // Test memory consumption is limited to 2 MB for 100 tests on PHP 5.6
+            $this->assertLessThan(2097152, memory_get_usage(true) - self::$mem_start);
         } else {
-            $this->assertLessThan(self::MAX_MEMORY_USAGE_PHP7, memory_get_usage(true));
+            $this->assertEquals(0, memory_get_usage(true) - self::$mem_start);
         }
     }
 }
