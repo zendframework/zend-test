@@ -96,6 +96,9 @@ abstract class AbstractControllerTestCase extends TestCase
         $_SERVER = $this->originalEnvironment['server'];
         $_ENV    = $this->originalEnvironment['env'];
         $_FILES  = $this->originalEnvironment['files'];
+
+        // Prevent memory leak
+        unset($this->application);
     }
 
     /**
