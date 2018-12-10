@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.2.1 - TBD
+## 3.2.1 - 2018-12-10
 
 ### Added
 
@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file, in reverse 
 - Nothing.
 
 ### Fixed
+
+- [#70](https://github.com/zendframework/zend-test/pull/70) fixes a memory leak in controller test cases.
 
 - [#66](https://github.com/zendframework/zend-test/pull/66) Fixes globals not
   cleared for controller tests
