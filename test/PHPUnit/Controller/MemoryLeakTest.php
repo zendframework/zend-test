@@ -17,20 +17,6 @@ class MemoryLeakTest extends AbstractControllerTestCase
         self::$mem_start = memory_get_usage(true);
     }
 
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->setApplicationConfig(
-            [
-                'modules'                 => [
-                    'Zend\\Router',
-                ],
-                'module_listener_options' => [],
-            ]
-        );
-    }
-
     public static function dataForMultipleTests()
     {
         return array_fill(0, 100, [null]);
