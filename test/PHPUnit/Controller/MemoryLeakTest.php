@@ -41,7 +41,11 @@ class MemoryLeakTest extends AbstractControllerTestCase
      */
     public function testMemoryConsumptionNotGrowing($null)
     {
-        $this->getApplication();
+        $this->setApplicationConfig(
+            include __DIR__ . '/../../_files/application.config.view.php'
+        );
+        $app = $this->getApplication();
+        $app->run();
 
         $this->assertNull($null);
 
