@@ -58,10 +58,18 @@ abstract class AbstractControllerTestCase extends TestCase
     protected $originalEnvironment;
 
     /**
+     * Is original environment have been done ?
+     *
+     * @var bool
+     */
+    protected $isOriginalEnvironmentPreserved = false;
+
+    /**
      * Reset the application for isolation
      */
     protected function setUp()
     {
+        $this->isOriginalEnvironmentPreserved = true;
         $this->originalEnvironment = [
             'post'   => $_POST,
             'get'    => $_GET,
@@ -89,13 +97,16 @@ abstract class AbstractControllerTestCase extends TestCase
     {
         Console::overrideIsConsole($this->usedConsoleBackup);
 
-        // Restore the original environment
-        $_POST   = $this->originalEnvironment['post'];
-        $_GET    = $this->originalEnvironment['get'];
-        $_COOKIE = $this->originalEnvironment['cookie'];
-        $_SERVER = $this->originalEnvironment['server'];
-        $_ENV    = $this->originalEnvironment['env'];
-        $_FILES  = $this->originalEnvironment['files'];
+        // We need to restore only if this has be saved
+        if ($this->isOriginalEnvironmentPreserved) {
+            // Restore the original environment
+            $_POST = $this->originalEnvironment['post'];
+            $_GET = $this->originalEnvironment['get'];
+            $_COOKIE = $this->originalEnvironment['cookie'];
+            $_SERVER = $this->originalEnvironment['server'];
+            $_ENV = $this->originalEnvironment['env'];
+            $_FILES = $this->originalEnvironment['files'];
+        }
 
         // Prevent memory leak
         $this->reset();
