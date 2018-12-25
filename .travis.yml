@@ -52,9 +52,10 @@ matrix:
     - php: 7.2
       env:
         - DEPS=latest
-    - php: 7.3
-      env:
-        - DEPS=lowest
+    # Disabled because PHPUnit 4.0 is not compatible with PHP 7.2 and 7.3
+    # - php: 7.3
+    #   env:
+    #     - DEPS=lowest
     - php: 7.3
       env:
         - DEPS=locked
