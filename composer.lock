@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f2dd7c9dac11ee2f0d5998fa1ddcdce",
+    "content-hash": "bf86eb359734daf37a5f184d6a328b1b",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1753,11 +1753,17 @@
         },
         {
             "name": "zendframework/zend-http",
-            "version": "dev-hotfix/base-url-console-request",
+            "version": "2.8.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webimpress/zend-http",
-                "reference": "bedb5c8895f2dd766175584dad74fac987cd9024"
+                "url": "https://github.com/zendframework/zend-http.git",
+                "reference": "e70ed2a51f37b848c8c3829739d1b1f803854ffa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/e70ed2a51f37b848c8c3829739d1b1f803854ffa",
+                "reference": "e70ed2a51f37b848c8c3829739d1b1f803854ffa",
+                "shasum": ""
             },
             "require": {
                 "php": "^5.6 || ^7.0",
@@ -1786,49 +1792,19 @@
                     "Zend\\Http\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "ZendTest\\Http\\": "test/"
-                }
-            },
-            "scripts": {
-                "check": [
-                    "@cs-check",
-                    "@test"
-                ],
-                "cs-check": [
-                    "phpcs"
-                ],
-                "cs-fix": [
-                    "phpcbf"
-                ],
-                "test": [
-                    "phpunit --colors=always"
-                ],
-                "test-coverage": [
-                    "phpunit --colors=always --coverage-clover clover.xml"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "description": "Provides an easy interface for performing Hyper-Text Transfer Protocol (HTTP) requests",
             "keywords": [
-                "HTTP client",
+                "ZendFramework",
                 "http",
+                "http client",
                 "zend",
-                "zendframework",
                 "zf"
             ],
-            "support": {
-                "docs": "https://docs.zendframework.com/zend-http/",
-                "issues": "https://github.com/zendframework/zend-http/issues",
-                "source": "https://github.com/zendframework/zend-http",
-                "rss": "https://github.com/zendframework/zend-http/releases.atom",
-                "chat": "https://zendframework-slack.herokuapp.com",
-                "forum": "https://discourse.zendframework.com/c/questions/components"
-            },
-            "time": "2018-12-25T13:40:16+00:00"
+            "time": "2019-01-08T15:55:38+00:00"
         },
         {
             "name": "zendframework/zend-json",
@@ -3121,18 +3097,9 @@
             "time": "2018-04-30T14:55:10+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.8.3",
-            "alias_normalized": "2.8.3.0",
-            "version": "dev-hotfix/base-url-console-request",
-            "package": "zendframework/zend-http"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "zendframework/zend-http": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

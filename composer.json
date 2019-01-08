@@ -15,12 +15,6 @@
         "slack": "https://zendframework-slack.herokuapp.com",
         "forum": "https://discourse.zendframework.com/c/questions/components"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/webimpress/zend-http"
-        }
-    ],
     "require": {
         "php": "^5.6 || ^7.0",
         "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0",
@@ -28,7 +22,7 @@
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-        "zendframework/zend-http": "dev-hotfix/base-url-console-request as 2.8.3",
+        "zendframework/zend-http": "^2.8.3",
         "zendframework/zend-mvc": "^3.0",
         "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
         "zendframework/zend-stdlib": "^2.7 || ^3.0",
