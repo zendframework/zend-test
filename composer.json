@@ -22,7 +22,7 @@
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-        "zendframework/zend-http": "^2.5.4",
+        "zendframework/zend-http": "^2.8.3",
         "zendframework/zend-mvc": "^3.0",
         "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
         "zendframework/zend-stdlib": "^2.7 || ^3.0",

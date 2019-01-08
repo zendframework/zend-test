@@ -51,33 +51,10 @@ abstract class AbstractControllerTestCase extends TestCase
     protected $traceError = true;
 
     /**
-     * Original environemnt
-     *
-     * @var array
-     */
-    protected $originalEnvironment;
-
-    /**
      * Reset the application for isolation
      */
     protected function setUp()
     {
-        $this->originalEnvironment = [
-            'post'   => $_POST,
-            'get'    => $_GET,
-            'cookie' => $_COOKIE,
-            'server' => $_SERVER,
-            'env'    => $_ENV,
-            'files'  => $_FILES,
-        ];
-
-        $_POST   = [];
-        $_GET    = [];
-        $_COOKIE = [];
-        $_SERVER = [];
-        $_ENV    = [];
-        $_FILES  = [];
-
         $this->usedConsoleBackup = Console::isConsole();
         $this->reset();
     }
@@ -88,14 +65,6 @@ abstract class AbstractControllerTestCase extends TestCase
     protected function tearDown()
     {
         Console::overrideIsConsole($this->usedConsoleBackup);
-
-        // Restore the original environment
-        $_POST   = $this->originalEnvironment['post'];
-        $_GET    = $this->originalEnvironment['get'];
-        $_COOKIE = $this->originalEnvironment['cookie'];
-        $_SERVER = $this->originalEnvironment['server'];
-        $_ENV    = $this->originalEnvironment['env'];
-        $_FILES  = $this->originalEnvironment['files'];
 
         // Prevent memory leak
         $this->reset();
