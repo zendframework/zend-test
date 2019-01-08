@@ -22,7 +22,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#74](https://github.com/zendframework/zend-test/pull/74) reverts changes introduced in version 3.2.1 to how superglobals are reset
+  between tests, primarily by fixing the root problem -- base URL detection --
+  by requiring a zend-http version that fixes that detection.
 
 ## 3.2.1 - 2018-12-10
 
