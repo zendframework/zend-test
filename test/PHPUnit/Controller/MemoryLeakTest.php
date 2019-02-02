@@ -12,7 +12,7 @@ class MemoryLeakTest extends AbstractControllerTestCase
 {
     public static $memStart;
 
-    public static function setUpBeforeClass()
+    protected static function setUpBeforeClassCompat()
     {
         self::$memStart = memory_get_usage(true);
     }

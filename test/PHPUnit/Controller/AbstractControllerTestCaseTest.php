@@ -50,7 +50,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         return rmdir($dir);
     }
 
-    protected function setUp()
+    protected function setUpCompat()
     {
         $this->traceErrorCache = $this->traceError;
         $this->tearDownCacheDir();
@@ -58,14 +58,14 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->setApplicationConfig(
             include __DIR__ . '/../../_files/application.config.php'
         );
-        parent::setUp();
+        parent::setUpCompat();
     }
 
-    protected function tearDown()
+    protected function tearDownCompat()
     {
         $this->traceError = $this->traceErrorCache;
         $this->tearDownCacheDir();
-        parent::tearDown();
+        parent::tearDownCompat();
     }
 
     public function testModuleCacheIsDisabled()

@@ -18,10 +18,13 @@ use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\Exception\LogicException;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ResponseInterface;
+use Zend\Test\PHPUnit\TestCaseTrait;
 use Zend\Uri\Http as HttpUri;
 
 abstract class AbstractControllerTestCase extends TestCase
 {
+    use TestCaseTrait;
+
     /**
      * @var \Zend\Mvc\ApplicationInterface
      */
@@ -52,8 +55,10 @@ abstract class AbstractControllerTestCase extends TestCase
 
     /**
      * Reset the application for isolation
+     *
+     * @internal
      */
-    protected function setUp()
+    protected function setUpCompat()
     {
         $this->usedConsoleBackup = Console::isConsole();
         $this->reset();
@@ -61,8 +66,10 @@ abstract class AbstractControllerTestCase extends TestCase
 
     /**
      * Restore params
+     *
+     * @internal
      */
-    protected function tearDown()
+    protected function tearDownCompat()
     {
         Console::overrideIsConsole($this->usedConsoleBackup);
 
