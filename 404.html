@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-test">  
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="//img/favicon.ico">
 
-    <title>Unit testing with PHPUnit - zend-test - Zend Framework Docs</title>
+    <title>zend-test - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-f3b53f5ceb.css">
+    <link rel="stylesheet" href="//css/styles-f3b53f5ceb.css">
 </head>
 <body id="page-top">
 
@@ -31,7 +31,7 @@
             
             <span class="navbar-brand">
                 <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
-                    <img src="../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                    <img src="//img/zend-framework-logo.svg" height="28" alt="Zend Framework">
                 </a>
             </span>
         </div>
@@ -66,7 +66,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-test</a>
+            <a href="/.">zend-test</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,19 +75,19 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
-                    </li>
-                
-            
-                
-                    <li class="subnavigation__list-item subnavigation__list-item--active">
-                        <a href="./" class="subnavigation__link">Unit testing with PHPUnit</a>
+                        <a href="/intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../assertions/" class="subnavigation__link">Assertions</a>
+                        <a href="/phpunit/" class="subnavigation__link">Unit testing with PHPUnit</a>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="/assertions/" class="subnavigation__link">Assertions</a>
                     </li>
                 
             
@@ -160,185 +160,18 @@
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
-                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-    <li><a href="https://framework.zend.com/">Home</a></li>
 
-    
-        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-        
-            <li><a href="..">zend-test</a></li>
-
-            
-
-            <li class="active">Unit testing with PHPUnit</li>
-        
-    
-</ol>
+<a href="/" class="btn btn-default" role="button">Go to homepage</a>
 
 
-    
-
-    
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#setup-your-testcase" class="toc__link">Setup your TestCase</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#testing-your-controllers-and-mvc-applications" class="toc__link">Testing your Controllers and MVC Applications</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
-
-    <h1 id="unit-testing-with-phpunit">Unit testing with PHPUnit</h1>
-<p><code>Zend\Test\PHPUnit</code> provides an abstract <code>TestCase</code> for zend-mvc applications
-that contains assertions for testing against a variety of responsibilities.
-Probably the easiest way to understand what it can do is to see an example.</p>
-<p>The following is a simple test case for an <code>IndexController</code> to verify things
-such as the final HTTP status code, and the discovered controller and action
-names:</p>
-<pre class="codehilite"><code class="language-php">namespace ApplicationTest\Controller;
-
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-
-class IndexControllerTest extends AbstractHttpControllerTestCase
-{
-    public function setUp()
-    {
-        $this-&gt;setApplicationConfig(
-            include '/path/to/application/config/test/application.config.php'
-        );
-        parent::setUp();
-    }
-
-    public function testIndexActionCanBeAccessed()
-    {
-        $this-&gt;dispatch('/');
-        $this-&gt;assertResponseStatusCode(200);
-
-        $this-&gt;assertModuleName('application');
-        $this-&gt;assertControllerName('application_index');
-        $this-&gt;assertControllerClass('IndexController');
-        $this-&gt;assertMatchedRouteName('home');
-    }
-}</code></pre>
-
-<p>The setup of the test case should define the application config. You can use
-several configuration files to test module dependencies or your current
-application config.</p>
-<h2 id="setup-your-testcase">Setup your TestCase</h2>
-<p>As noted in the previous example, all MVC test cases should extend
-<code>AbstractHttpControllerTestCase</code>.  This class in turn extends
-<code>PHPUnit_Framework_TestCase</code>, and gives you all the structure and assertions
-you'd expect from PHPUnit, as well as some scaffolding and assertions specific
-to zend-mvc.</p>
-<p>In order to test your MVC application, you will need to setup the application
-configuration. Use the <code>setApplicationConfig()</code> method to do this:</p>
-<pre class="codehilite"><code class="language-php">public function setUp()
-{
-    $this-&gt;setApplicationConfig(
-        include '/path/to/application/config/test/application.config.php'
-    );
-    parent::setUp();
-}</code></pre>
-
-<p>Once the application is set up, you can write your tests. To help debug tests,
-you can activate the flag <code>traceError</code> to throw MVC exceptions during test
-execution:</p>
-<pre class="codehilite"><code class="language-php">namespace ApplicationTest\Controller;
-
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-
-class IndexControllerTest extends AbstractHttpControllerTestCase
-{
-    protected $traceError = true;
-}</code></pre>
-
-<h2 id="testing-your-controllers-and-mvc-applications">Testing your Controllers and MVC Applications</h2>
-<p>Once you have your application config in place, you can begin testing. Testing
-is basically as you would expect in an PHPUnit test suite, with a few minor
-differences.</p>
-<p>First, you will need to dispatch a URL to test, using the <code>dispatch</code> method of
-the TestCase:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
-{
-    $this-&gt;dispatch('/');
-}</code></pre>
-
-<p>There will be times, however, that you need to provide extra information: query
-string arguments, POST, variables, cookies, etc.  You can populate the request
-with that information:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
-{
-    $this-&gt;getRequest()
-        -&gt;setMethod('POST')
-        -&gt;setPost(new Parameters(['argument' =&gt; 'value']));
-    $this-&gt;dispatch('/');
-}</code></pre>
-
-<p>You can populate query string arguments or POST variables directly with the
-<code>dispatch</code> method:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
-{
-    $this-&gt;dispatch('/', 'POST', ['argument' =&gt; 'value']);
-}</code></pre>
-
-<p>Query string arguments can be provided in the URL you dispatch:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
-{
-    $this-&gt;dispatch('/tests?foo=bar&amp;baz=foo');
-}</code></pre>
-
-<p>Now that the request is made, it's time to start <a href="../assertions/">making assertions</a> against it.</p>
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../assertions/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-test/edit/master/docs/book/phpunit.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             <!-- content:end -->
             </div>
             <div class="col-md-3 col-xs-12 sidebar">
@@ -354,7 +187,7 @@ with that information:</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-test</a>
+            <a href="/.">zend-test</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -363,19 +196,19 @@ with that information:</p>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
-                    </li>
-                
-            
-                
-                    <li class="subnavigation__list-item subnavigation__list-item--active">
-                        <a href="./" class="subnavigation__link">Unit testing with PHPUnit</a>
+                        <a href="/intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../assertions/" class="subnavigation__link">Assertions</a>
+                        <a href="/phpunit/" class="subnavigation__link">Unit testing with PHPUnit</a>
+                    </li>
+                
+            
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="/assertions/" class="subnavigation__link">Assertions</a>
                     </li>
                 
             
@@ -450,11 +283,11 @@ with that information:</p>
 </footer>
 
     <script>
-        var base_url = '..',
+        var base_url = '/',
             siteName = 'zend-test';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="//js/scripts-8d7ae56abf.js"></script>
+        <script src="/search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
