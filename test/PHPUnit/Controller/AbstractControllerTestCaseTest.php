@@ -194,7 +194,10 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertTrue($caught, 'Did not catch expected exception!');
 
         $this->assertContainsCompat('actual module name is "baz"', $message);
-        $this->assertNotContainsCompat("Exception 'RuntimeException' with message 'Expected exception message'", $message);
+        $this->assertNotContainsCompat(
+            "Exception 'RuntimeException' with message 'Expected exception message'",
+            $message
+        );
         $this->assertNotContainsCompat(__FILE__, $message);
     }
 
