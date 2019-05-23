@@ -23,14 +23,14 @@ trait TestCaseNoTypeHintTrait
 
     public static function setUpBeforeClass()
     {
-        if (method_exists(__CLASS__, 'setUpBeforeClassCompat')) {
+        if (method_exists(static::class, 'setUpBeforeClassCompat')) {
             static::setUpBeforeClassCompat();
         }
     }
 
     public static function tearDownAfterClass()
     {
-        if (method_exists(__CLASS__, 'tearDownAfterClassCompat')) {
+        if (method_exists(static::class, 'tearDownAfterClassCompat')) {
             static::tearDownAfterClassCompat();
         }
     }
