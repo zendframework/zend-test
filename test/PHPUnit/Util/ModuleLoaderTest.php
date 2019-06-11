@@ -10,12 +10,14 @@ namespace ZendTest\Test\PHPUnit\Util;
 
 use PHPUnit\Framework\TestCase;
 use Zend\ModuleManager\Exception\RuntimeException;
+use Zend\Test\PHPUnit\TestCaseTrait;
 use Zend\Test\Util\ModuleLoader;
 use ZendTest\Test\ExpectedExceptionTrait;
 
 class ModuleLoaderTest extends TestCase
 {
     use ExpectedExceptionTrait;
+    use TestCaseTrait;
 
     public function tearDownCacheDir()
     {
@@ -35,12 +37,12 @@ class ModuleLoaderTest extends TestCase
         return rmdir($dir);
     }
 
-    public function setUp()
+    protected function setUpCompat()
     {
         $this->tearDownCacheDir();
     }
 
-    public function tearDown()
+    protected function tearDownCompat()
     {
         $this->tearDownCacheDir();
     }

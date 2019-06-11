@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#76](https://github.com/zendframework/zend-test/pull/76) adds support for PhpUnit 8
 
 ### Changed
 
