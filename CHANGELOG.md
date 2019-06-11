@@ -2,33 +2,11 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.3.0 - TBD
+## 3.3.0 - 2019-06-11
 
 ### Added
 
 - [#76](https://github.com/zendframework/zend-test/pull/76) adds support for PhpUnit 8
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 3.2.3 - TBD
-
-### Added
-
-- Nothing.
 
 ### Changed
 
