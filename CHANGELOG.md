@@ -28,7 +28,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#76](https://github.com/zendframework/zend-test/pull/76) adds support for PhpUnit 8
+- [#76](https://github.com/zendframework/zend-test/pull/76) adds support for PHPUnit 8
+  
+  Undesired PHPUnit update to ^8.0 can happen on PHP 7.2 and newer when relying
+  on PHPUnit installation as an indirect dependency via zend-test.
+  Please always declare direct dependency on `phpunit/phpunit` with suitable
+  versions alongside with `zendframework/zend-test`.
+  
+  PHPUnit 8 incompatible test suite typically would error after the update
+  with messages like "Fatal error: Declaration of *::setUp() must be
+  compatible with *::setUp(): void" for any of the following methods:
+
+  - `setUpBeforeClass()`
+  - `tearDownAfterClass()`
+  - `setUp()`
+  - `tearDown()`
+
+  Following command can be used to declare explicit dependency on older PHPUnit versions:
+  ```bash
+  composer require --dev phpunit/phpunit:"^7.5.12 || ^6.5.14 || ^5.7.14" --update-with-dependencies
+  ```
 
 ### Changed
 
