@@ -242,7 +242,7 @@ Probably the easiest way to understand what it can do is to see an example.</p>
 <p>The following is a simple test case for an <code>IndexController</code> to verify things
 such as the final HTTP status code, and the discovered controller and action
 names:</p>
-<pre class="codehilite"><code class="language-php">namespace ApplicationTest\Controller;
+<p> <pre class=codehilite><code class=language-php>namespace ApplicationTest\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
@@ -266,8 +266,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this-&gt;assertControllerClass('IndexController');
         $this-&gt;assertMatchedRouteName('home');
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>The setup of the test case should define the application config. You can use
 several configuration files to test module dependencies or your current
 application config.</p>
@@ -279,61 +278,55 @@ you'd expect from PHPUnit, as well as some scaffolding and assertions specific
 to zend-mvc.</p>
 <p>In order to test your MVC application, you will need to setup the application
 configuration. Use the <code>setApplicationConfig()</code> method to do this:</p>
-<pre class="codehilite"><code class="language-php">public function setUp()
+<p> <pre class=codehilite><code class=language-php>public function setUp()
 {
     $this-&gt;setApplicationConfig(
         include '/path/to/application/config/test/application.config.php'
     );
     parent::setUp();
-}</code></pre>
-
+}</code></pre></p>
 <p>Once the application is set up, you can write your tests. To help debug tests,
 you can activate the flag <code>traceError</code> to throw MVC exceptions during test
 execution:</p>
-<pre class="codehilite"><code class="language-php">namespace ApplicationTest\Controller;
+<p> <pre class=codehilite><code class=language-php>namespace ApplicationTest\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
     protected $traceError = true;
-}</code></pre>
-
+}</code></pre></p>
 <h2 id="testing-your-controllers-and-mvc-applications">Testing your Controllers and MVC Applications</h2>
 <p>Once you have your application config in place, you can begin testing. Testing
 is basically as you would expect in an PHPUnit test suite, with a few minor
 differences.</p>
 <p>First, you will need to dispatch a URL to test, using the <code>dispatch</code> method of
 the TestCase:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<p> <pre class=codehilite><code class=language-php>public function testIndexAction()
 {
     $this-&gt;dispatch('/');
-}</code></pre>
-
+}</code></pre></p>
 <p>There will be times, however, that you need to provide extra information: query
 string arguments, POST, variables, cookies, etc.  You can populate the request
 with that information:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<p> <pre class=codehilite><code class=language-php>public function testIndexAction()
 {
     $this-&gt;getRequest()
         -&gt;setMethod('POST')
         -&gt;setPost(new Parameters(['argument' =&gt; 'value']));
     $this-&gt;dispatch('/');
-}</code></pre>
-
+}</code></pre></p>
 <p>You can populate query string arguments or POST variables directly with the
 <code>dispatch</code> method:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<p> <pre class=codehilite><code class=language-php>public function testIndexAction()
 {
     $this-&gt;dispatch('/', 'POST', ['argument' =&gt; 'value']);
-}</code></pre>
-
+}</code></pre></p>
 <p>Query string arguments can be provided in the URL you dispatch:</p>
-<pre class="codehilite"><code class="language-php">public function testIndexAction()
+<p> <pre class=codehilite><code class=language-php>public function testIndexAction()
 {
     $this-&gt;dispatch('/tests?foo=bar&amp;baz=foo');
-}</code></pre>
-
+}</code></pre></p>
 <p>Now that the request is made, it's time to start <a href="../assertions/">making assertions</a> against it.</p>
 
 
@@ -368,7 +361,7 @@ with that information:</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-test/edit/master/docs/phpunit.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-test/edit/master/docs/book/phpunit.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
