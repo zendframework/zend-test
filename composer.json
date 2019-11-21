@@ -31,7 +31,6 @@
     },
     "require-dev": {
         "mikey179/vfsstream": "~1.2",
-        "symfony/finder": "^2.2",
         "zendframework/zend-coding-standard": "~1.0.0",
         "zendframework/zend-i18n": "^2.6",
         "zendframework/zend-log": "^2.7.1",
