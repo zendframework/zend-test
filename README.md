@@ -2,7 +2,7 @@
 
 > ## Repository abandoned 2019-12-31
 >
-> This repository has moved to laminas/laminas-test.
+> This repository has moved to [laminas/laminas-test](https://github.com/laminas/laminas-test).
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-test.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-test)
 [![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-test/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-test?branch=master)
