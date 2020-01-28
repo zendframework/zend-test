@@ -488,15 +488,15 @@ abstract class AbstractControllerTestCase extends TestCase
     /**
      * Assert the application exception and message
      *
-     * @param $type application exception type
-     * @param $message application exception message
+     * @param string $type application exception type
+     * @param string|null $message application exception message
      */
     public function assertApplicationException($type, $message = null)
     {
         $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
         if (! $exception) {
             throw new ExpectationFailedException($this->createFailureMessage(
-                'Failed asserting application exception, exception not exist'
+                'Failed asserting application exception, param "exception" does not exist'
             ));
         }
         if (true === $this->traceError) {
